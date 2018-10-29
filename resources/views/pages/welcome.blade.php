@@ -82,7 +82,7 @@
                 width: 100px;
                 height: 40px;
                 position: absolute;
-                right: 115px;
+                right: 110px;
             }
         </style>
     </head>
