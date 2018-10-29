@@ -6,4 +6,4 @@
     <h2>Slaptažodis</h2> <input type="text">
 </div>
 <br>
-<input type=button onClick="parent.location='menu.blade.php'" value='Patvirtinti'>
+<input type=button onClick="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Prisijungti></a>

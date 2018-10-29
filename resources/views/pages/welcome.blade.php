@@ -88,8 +88,14 @@
     </head>
     <body>
             <div class="content">
-                <input type=button onClick="parent.location='login.blade.php'" value='Prisijungti'>
-                <input type=button onClick="parent.location='registration.blade.php'" value='Registruotis'>
+                <button class="link-button" data-url="/login">Prisijungti</button>
+                <button type=button onClick="{{Request::is('/registration')?'active':null }}"><a href="{{url('/registration')}}">Registracija></a></button>
+
+                <script>
+                    $('.link-button').on('click', function(e) {
+                        window.location = $(this).data('/login');
+                    });
+                </script>
                 <br>
                 <br>
                 <div class="title m-b-md">

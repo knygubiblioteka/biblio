@@ -8,4 +8,4 @@
     <h2>Elektroninis paštas</h2> <input type="email">
 </div>
 <br>
-<input type=button onClick="parent.location='login.blade.php'" value='Patvirtinti'>
+<input type=button onClick="{{Request::is('/login')?'active':null }}"><a href="{{url('/login')}}">Patvirtinti></a>
