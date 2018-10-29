@@ -82,20 +82,14 @@
                 width: 100px;
                 height: 40px;
                 position: absolute;
-                right: 110px;
+                right: 115px;
             }
         </style>
     </head>
     <body>
             <div class="content">
-                <button class="link-button" data-url="/login">Prisijungti</button>
-                <button type=button onClick="{{Request::is('/registration')?'active':null }}"><a href="{{url('/registration')}}">Registracija></a></button>
-
-                <script>
-                    $('.link-button').on('click', function(e) {
-                        window.location = $(this).data('/login');
-                    });
-                </script>
+                <a href=../public/login><input type=button value='Prisijungti'></a>
+                <a href=../public/registration><input type=button value='Registruotis'></a>
                 <br>
                 <br>
                 <div class="title m-b-md">
