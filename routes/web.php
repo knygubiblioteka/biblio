@@ -26,3 +26,9 @@ Route::get('/reports', function () {
 Route::get('/catalog', function () {
     return view('pages.catalog');
 });
+Route::get('/book', function () {
+    return view('pages.book');
+});
+Route::get('/bookInfo', function () {
+    return view('pages.bookInfo');
+});

@@ -93,16 +93,14 @@
             <a class="navbar-brand" href="#">Biblioteka</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="catalog.blade.php">Katalogas</a></li>
+            <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li><a href="#">Page 1</a></li>
             <li><a href="#">Page 2</a></li>
-            <li><a href="reports.blade.php">Ataskaitos</a></li>
-
-
+            <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
-            <li class="{{Request::is('/')?'active':null}}"><a href="welcome.blade.php"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
+            <li class="{{Request::is('/')?'active':null}}"><a href="{{url('/')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
+        </ul>
     </div>
 </nav>
 <ul class="nav navbar-nav">
@@ -117,7 +115,7 @@
 
 </div>
 <div style="text-align: right" >
-   <a href="book.blade.php">Pridėti naują knygą</a>
+    <td class="{{Request::is('/book')?'active':null }}"><a href="{{url('/book')}}">Pridėti naują knygą</a></td>
 </div>
 
 
@@ -172,7 +170,8 @@
                     <td>Rūta Šepetys</td>
                     <td>Romanas</td>
                     <td>2011</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
+
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -181,7 +180,7 @@
                     <td>Melvin Burges</td>
                     <td>Drama</td>
                     <td>2012</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -190,7 +189,7 @@
                     <td>Vincas Mykolaitis-Putinas</td>
                     <td>Romanas</td>
                     <td>1933</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -199,7 +198,7 @@
                     <td>Antanas Škėma</td>
                     <td>Romanas</td>
                     <td>1958</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -208,7 +207,7 @@
                     <td>Juozas Tumas-Vaižgantas</td>
                     <td>Romanas</td>
                     <td>1929</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -217,7 +216,7 @@
                     <td>Antanas Baranauskas</td>
                     <td>Romanas</td>
                     <td>1958</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -226,7 +225,7 @@
                     <td>Šatrijos Ragana</td>
                     <td>Romanas</td>
                     <td>1922</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -235,7 +234,7 @@
                     <td>Adomas Mickevičius</td>
                     <td>Poema</td>
                     <td>1834</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -244,7 +243,7 @@
                     <td>Jonas Biliūnas</td>
                     <td>Novelė</td>
                     <td>1902</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 <tr>
@@ -253,7 +252,7 @@
                     <td>Salomėja Nėris</td>
                     <td>Poezija</td>
                     <td>1945</td>
-                    <td>  <a href="bookInfo.blade.php">Peržiūrėti</a></td>
+                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
                     <td>  <a href="catalog.blade.php">Šalinti</a></td>
                 </tr>
                 </tbody>
