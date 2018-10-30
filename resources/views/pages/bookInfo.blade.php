@@ -85,27 +85,22 @@
     }
 </style>
 <body>
-
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Biblioteka</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="catalog.blade.php">Katalogas</a></li>
+            <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li><a href="#">Page 1</a></li>
             <li><a href="#">Page 2</a></li>
-            <li><a href="reports.blade.php">Ataskaitos</a></li>
-
-
+            <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
-            <li class="{{Request::is('/')?'active':null}}"><a href="welcome.blade.php"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
+            <li class="{{Request::is('/')?'active':null}}"><a href="{{url('/')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
+        </ul>
     </div>
 </nav>
-
 <div style='text-align:center'>
 
         <h2>Knygos informacija</h2>
@@ -156,7 +151,7 @@
 
 
             <div style='text-align:center'>
-                <input type=button onClick="parent.location='catalog.blade.php'" value='Vertinti'>
+                <input type=button value='Vertinti'>
             </div>
             <br>
         </div>
