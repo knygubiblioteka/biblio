@@ -172,7 +172,7 @@
                     <td>2011</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
 
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td> <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -181,7 +181,7 @@
                     <td>Drama</td>
                     <td>2012</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>3</td>
@@ -190,7 +190,7 @@
                     <td>Romanas</td>
                     <td>1933</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>4</td>
@@ -199,7 +199,7 @@
                     <td>Romanas</td>
                     <td>1958</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>5</td>
@@ -208,7 +208,7 @@
                     <td>Romanas</td>
                     <td>1929</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>6</td>
@@ -217,7 +217,7 @@
                     <td>Romanas</td>
                     <td>1958</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>7</td>
@@ -226,7 +226,7 @@
                     <td>Romanas</td>
                     <td>1922</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>8</td>
@@ -235,7 +235,7 @@
                     <td>Poema</td>
                     <td>1834</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>9</td>
@@ -244,7 +244,7 @@
                     <td>Novelė</td>
                     <td>1902</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 <tr>
                     <td>10</td>
@@ -253,7 +253,7 @@
                     <td>Poezija</td>
                     <td>1945</td>
                     <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href="catalog.blade.php">Šalinti</a></td>
+                    <td>  <a href=>Šalinti</a></td>
                 </tr>
                 </tbody>
             </table>

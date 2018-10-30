@@ -1,3 +1,19 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Biblioteka</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="{{Request::is('/')?'active':null}}"><a href="{{url('/')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
+        </ul>
+    </div>
+</nav>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,27 +101,6 @@
     }
 </style>
 <body>
-
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Biblioteka</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="catalog.blade.php">Katalogas</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="reports.blade.php">Ataskaitos</a></li>
-
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-
-            <li class="{{Request::is('/')?'active':null}}"><a href="welcome.blade.php"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
-    </div>
-</nav>
-
 <div style='text-align:center'>
 
         <h2>Pridėti naują knygą</h2>
@@ -146,7 +141,7 @@
 
 
             <div style='text-align:right'>
-                <input type=button onClick="parent.location='catalog.blade.php'" value='Patvirtinti'>
+                <input type=button value='Patvirtinti'>
             </div>
             <br>
         </div>
