@@ -34,12 +34,13 @@
         background-repeat: no-repeat;
         background-position-x: 100%;
         background-position-y: 5px;
-        border: 1px solid #dfdfdf;
+        border: 1px solid #2196F3;
         text-align: center;
     }
 
     input[value="Rodyti"]
     {
+        border: 1px solid #2196F3;
         background-color: #a1cbef;
         color: black;
         font-weight: bold;
@@ -54,9 +55,23 @@
         right: 145px;
     }
 
+    input[name="from"]
+    {
+        border: 1px solid #2196F3;
+        background-color: #a1cbef;
+        position: absolute;
+        right: 130px;
+        top:102px;
+    }
+    h3{
+        position: absolute;
+        right: 300px;
+        top:80px;
+        font-size: 15px;
+
+    }
+
 </style>
-
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -71,6 +86,20 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+                <script>
+                    $("#datepicker_from").datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        format: 'DD-MM-YYYY',
+                        startDate: '01-10-2017',
+                        onSelect: function (dateText) {
+                            $("#datepicker_to").datepicker('option','minDate',dateText);
+                        }
+                    });
+                </script><h3>Pasirinkite datą</h3>
+                <input type="date" name="from"/>
                 <br>
                 <br>
                 <!-- DROP DOWN-->
@@ -83,14 +112,13 @@
                             <option value="3">Vartotojo žymos</option>
                             <option value="4">Padalinių populiarumas</option>
                             <option value="5">Populiariausios knygos pagal žanrą</option>
-                            <option value="6">Greitai pasirodysiančios knygos</option>
+                            <option value="6">Populiariausios knygos pagal metus</option>
                         </select>
                     </div>
                 <br>
                 <br>
                 <br>
                     <input type="submit" value="Rodyti">
-                <br>
                 <br>
                 <br>
                 <br>
@@ -177,7 +205,6 @@
                         </tr>
                         </tbody>
                     </table>
-
             </div>
         </div>
     </div>
