@@ -32,3 +32,15 @@ Route::get('/book', function () {
 Route::get('/bookInfo', function () {
     return view('pages.bookInfo');
 });
+Route::get('/ClientManagement', function () {
+    return view('pages.ClientManagement');
+});
+Route::get('/editClient', function () {
+    return view('pages.editClient');
+});
+Route::get('/customerReports', function () {
+    return view('pages.customerReports');
+});
+Route::get('/customerBasket', function () {
+    return view('pages.customerBasket');
+});
