@@ -6,4 +6,4 @@
     <h2>Slaptažodis</h2> <input type="text">
 </div>
 <br>
-<input type=button onClick="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Prisijungti></a>
+<a href=../public/catalog><input type=button value='Prisijungti'></a>
