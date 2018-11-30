@@ -17,12 +17,18 @@ Route::get('/', function () {
 Route::get('/registration', function () {
     return view('pages.registration');
 });
+Route::post('/store', 'UserController@store');
+
 Route::get('/login', function () {
     return view('pages.login');
 });
+
+Route::post('/logs', 'UserController@logs');
+
 Route::get('/reports', function () {
     return view('pages.reports');
 })->name('reports');
+
 Route::get('/catalog', function () {
     return view('pages.catalog');
 });
