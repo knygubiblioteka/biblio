@@ -13,7 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -65,24 +65,36 @@
 
             input[value="Prisijungti"]
             {
-                background-color: #a1cbef;
+                background-color: #A1B0AB;
                 color: black;
                 font-weight: bold;
+                font-size: 15px;
                 width: 100px;
                 height: 40px;
                 position: absolute;
                 right: 10px;
+                border-radius: 12px;
+                font-family: 'Nunito', sans-serif;
             }
 
             input[value="Registruotis"]
             {
-                background-color: #a1cbef;
+                background-color: #A1B0AB;
                 color: black;
                 font-weight: bold;
+                font-size: 15px;
                 width: 100px;
                 height: 40px;
                 position: absolute;
                 right: 115px;
+                border-radius: 12px;
+                font-family: 'Nunito', sans-serif;
+            }
+
+            input:hover {
+                background-color: #907D8D;
+                color: black;
+                font-family: 'Nunito', sans-serif;
             }
         </style>
     </head>
