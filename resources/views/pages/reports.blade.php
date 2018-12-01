@@ -1,3 +1,11 @@
+<head>
+    <title>Biblioteka</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -15,53 +23,61 @@
     </div>
 </nav>
 <style>
+
+    html, body {
+        background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        margin: 0;
+        height: 100%;
+        background-attachment: fixed;
+    }
+
     .dropdown2{
-        position: absolute;
-        right: 600px;
         font-size: 20px;
         font-weight: bold;
     }
     select[name="tipas"]
     {
-        background-color: #a1cbef;
+        background-color: #A1B0AB;
         color: black;
         font-weight: bold;
         font-size: 15px;
-        width: 320px;
-        height: 40px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-repeat: no-repeat;
-        background-position-x: 100%;
-        background-position-y: 5px;
-        border: 1px solid #2196F3;
-        text-align: center;
+        width: 250px;
+        border-radius: 12px;
+        height: 25px;
+        font-family: 'Nunito', sans-serif;
     }
 
     input[value="Rodyti"]
     {
-        border: 1px solid #2196F3;
-        background-color: #a1cbef;
+        background-color: #A1B0AB;
         color: black;
         font-weight: bold;
+        font-size: 15px;
         width: 100px;
-        height: 40px;
-        position: absolute;
-        right: 490px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
     }
-
+    input:hover {
+        background-color: #907D8D;
+        color: black;
+        font-family: 'Nunito', sans-serif;
+    }
+    input[type="date"]
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 150px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
     table{
         position: absolute;
         right: 145px;
-    }
-
-    input[name="from"]
-    {
-        border: 1px solid #2196F3;
-        background-color: #a1cbef;
-        position: absolute;
-        right: 130px;
-        top:102px;
     }
     h3{
         position: absolute;
@@ -72,55 +88,24 @@
     }
 
 </style>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>Biblioteka</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+
+    <html>
     <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-                <script>
-                    $("#datepicker_from").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        format: 'DD-MM-YYYY',
-                        startDate: '01-10-2017',
-                        onSelect: function (dateText) {
-                            $("#datepicker_to").datepicker('option','minDate',dateText);
-                        }
-                    });
-                </script><h3>Pasirinkite datą</h3>
-                <input type="date" name="from"/>
-                <br>
-                <br>
-                <!-- DROP DOWN-->
-                    <div class="dropdown2">Pasirinkite ataskaitos tipą
-                        <br>
-                        <br>
-                        <select name="tipas">
-                            <option value="1">Populiariausios knygos</option>
-                            <option value="2">Geriausiai įvertintos knygos</option>
-                            <option value="3">Vartotojo žymos</option>
-                            <option value="4">Padalinių populiarumas</option>
-                            <option value="5">Populiariausios knygos pagal žanrą</option>
-                            <option value="6">Populiariausios knygos pagal metus</option>
-                        </select>
-                    </div>
-                <br>
-                <br>
-                <br>
-                    <input type="submit" value="Rodyti">
-                <br>
-                <br>
+            <div class="col-xs-12 col-md-8">
+                <div class="dropdown2">Pasirinkite ataskaitos tipą
+                    <br>
+                    <br>
+                    <select name="tipas">
+                        <option value="1">Populiariausios knygos</option>
+                        <option value="2">Geriausiai įvertintos knygos</option>
+                        <option value="3">Vartotojo žymos</option>
+                        <option value="4">Padalinių populiarumas</option>
+                        <option value="5">Populiariausios knygos pagal žanrą</option>
+                        <option value="6">Populiariausios knygos pagal metus</option>
+                    </select>
+                    <input type="submit" value="Rodyti">   <input type="date" name="from"/>
+                </div>
                 <br>
                     <table class="table table-hover">
                         <thead>
@@ -154,58 +139,9 @@
                             <td>Romanas</td>
                             <td>1933</td>
                         </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Balta drobulė</td>
-                            <td>Antanas Škėma</td>
-                            <td>Romanas</td>
-                            <td>1958</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Dėdės ir dėdienės</td>
-                            <td>Juozas Tumas-Vaižgantas</td>
-                            <td>Romanas</td>
-                            <td>1929</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Anykščių šilelis</td>
-                            <td>Antanas Baranauskas</td>
-                            <td>Romanas</td>
-                            <td>1958</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Sename dvare</td>
-                            <td>Šatrijos Ragana</td>
-                            <td>Romanas</td>
-                            <td>1922</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Ponas Tadas</td>
-                            <td>Adomas Mickevičius</td>
-                            <td>Poema</td>
-                            <td>1834</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Lazda</td>
-                            <td>Jonas Biliūnas</td>
-                            <td>Novelė</td>
-                            <td>1902</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Lakštingala negali nečiulbėti</td>
-                            <td>Salomėja Nėris</td>
-                            <td>Poezija</td>
-                            <td>1945</td>
-                        </tr>
+
                         </tbody>
                     </table>
-            </div>
         </div>
     </div>
     </body>
