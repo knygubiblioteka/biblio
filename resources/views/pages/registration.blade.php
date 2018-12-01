@@ -72,7 +72,7 @@
         <br>
     <input type="email" name="el_pastas" placeholder="Įveskite el. paštą" value=""><br>
         <br>
-    <input type="text" name="slaptazodis" placeholder="Įveskite slaptažodį" value=""><br>
+    <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" value=""><br>
         <br>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <button type=submit name="button">Patvirtinti</button>
