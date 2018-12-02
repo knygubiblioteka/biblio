@@ -29,6 +29,8 @@ Route::get('/reports', function () {
     return view('pages.reports');
 })->name('reports');
 
+Route::get('/showtable', 'ReportsController@showtable');
+
 Route::get('/catalog', function () {
     return view('pages.catalog');
 });

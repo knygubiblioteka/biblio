@@ -94,6 +94,7 @@
     <body>
     <div class="container">
             <div class="col-xs-12 col-md-8">
+                <form action ="/showtable" method = "get">
                 <div class="dropdown2">Pasirinkite ataskaitos tipą
                     <br>
                     <br>
@@ -105,11 +106,12 @@
                         <option value="5">Populiariausios knygos pagal žanrą</option>
                         <option value="6">Populiariausios knygos pagal metus</option>
                     </select>
-                    <input type="submit" value="Rodyti">   <input type="date" name="from"/>
+                    <input type="submit" value="Rodyti">   <input type="date" name="from"/><input type="date" name="to"/>
+
                 </div>
                 <br>
                     <table class="table table-hover">
-                        <thead>
+
                         <tr>
                             <th>Nr.</th>
                             <th>Pavadinimas</th>
@@ -117,32 +119,20 @@
                             <th>Žanras</th>
                             <th>Metai</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Tarp pilkų debesų</td>
-                            <td>Rūta Šepetys</td>
-                            <td>Romanas</td>
-                            <td>2011</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Moe</td>
-                            <td>Melvin Burges</td>
-                            <td>Drama</td>
-                            <td>2012</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Altorių šešėly</td>
-                            <td>Vincas Mykolaitis-Putinas</td>
-                            <td>Romanas</td>
-                            <td>1933</td>
-                        </tr>
 
-                        </tbody>
+                        {{$sumting = 1}}
+                        @foreach($knyga as $knyga1)
+                        <tr>
+                            <td>{{$knyga1->id_Knyga}}</td>
+                            <td>{{$knyga1->pavadinimas}}</td>
+                            <td>{{$knyga1->autorius}}</td>
+                            <td>{{$knyga1->zanras}}</td>
+                            <td>{{$knyga1->isleidimo_data}}</td>
+                            {{$sumting = $sumting + 1}}
+                        </tr>
+                        @endforeach
                     </table>
+                </form>
         </div>
     </div>
     </body>
