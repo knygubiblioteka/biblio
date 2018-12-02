@@ -29,46 +29,70 @@
     </div>
 </nav>
 <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
 
-    /* The Modal (background) */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    html, body {
+        background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        margin: 0;
+        height: 100%;
+        background-attachment: fixed;
     }
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    /* The Close Button */
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
+    .dropdown2{
+        font-size: 20px;
         font-weight: bold;
     }
-
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
+    select[name="tipas"]
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 250px;
+        border-radius: 12px;
+        height: 25px;
+        font-family: 'Nunito', sans-serif;
     }
+
+    button
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 100px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+    input:hover {
+        background-color: #907D8D;
+        color: black;
+        font-family: 'Nunito', sans-serif;
+    }
+    input
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 150px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+    table{
+        position: absolute;
+        right: 145px;
+    }
+    h3{
+        position: absolute;
+        right: 300px;
+        top:80px;
+        font-size: 15px;
+
+    }
+
 </style>
 <body>
 <br>

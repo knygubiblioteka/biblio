@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+?>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Biblioteka</title>
@@ -7,6 +10,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style>
+    html, body {
+        background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        height: 100vh;
+        margin: 0;
+    }
+
+    h2 {
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    button
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 100px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    button:hover {
+        background-color: #907D8D;
+        color: black;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    input {
+        border-radius: 12px;
+        text-align: center;
+        font-family: 'Nunito', sans-serif;
+        width: 300px;
+    }
+
+</style>
 </head>
 
 
@@ -39,10 +86,12 @@
 
     <form>
         Vardas:<br>
-        <input type="text" name="name" value="Vardenis">
+        <input type="text" name="name" value="vardenis">
         <br><br>
         Pavarde:<br>
-        <input type="text" name="surname" value="Pavardenis"><br>
+        <input type="text" name="surname" value="Pavardenis"><br><br>
+        Login:<br>
+        <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>"><br>
         <br>Gimimo data:<br>
         <input type="date" name="data"><br>
         <br>

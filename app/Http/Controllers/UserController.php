@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
-
+session_start();
 
 class UserController extends Controller
 {
@@ -37,14 +37,36 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $slaptazodis=$request->input('slaptazodis');
 
         $data= DB::select('select id_Vartotojas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-
         if(count($data))
         {
-            return redirect('/catalog');
+            $_SESSION["username"] = $prisijungimo_vardas;
+         //   $result= DB::select('select vardas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+           // var_dump($result);
+            //die;
+
+                    $_SESSION["name"] = DB::select('select vardas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+                  //  var_dump( $_SESSION["name"]);
+                 //   die;
+                    $_SESSION["surname"] = DB::select('select pavarde from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+                    $_SESSION["phone"] = DB::select('select mob_numeris from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+                    $_SESSION["el"] = DB::select('select el_pastas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+                    $_SESSION["city"] = DB::select('select miestas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+
+
+    return redirect('/catalog');
+
         }
         else
         {
             echo "Neteisingi prisijungimo duomenys";
+
         }
+    }
+
+    public function edit(Request $request)
+    {
+        //$data= DB::select('select id_Vartotojas from vartotojas where prisijungimo_vardas=?',$_SESSION["username"]);
+
+        //
     }
 }
