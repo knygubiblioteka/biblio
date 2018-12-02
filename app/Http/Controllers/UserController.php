@@ -7,10 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 session_start();
+use Illuminate\Validation;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     //
+    public function validator(array $data)
+    {
+        return Validator::make($data, [
+            'vardas' => 'required|string|max:255',
+            'pavarde' => 'required|string|max:255',
+            'prisijungimo_vardas' => 'required|string|max:255',
+            'el_pastas' => 'required|string|email|max:255|unique:users',
+            'slaptazodis' => 'required|string|min:6|confirmed',
+        ]);
+    }
+
+
+
     public function store(request $request)     //registracijos duomenis iraso i db
     {
         //print_r($request->input());

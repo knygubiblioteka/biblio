@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 class ReportsController extends Controller
 {
     //
+
+
     public function showtable(Request $request)
     {
         $tables = ['populiariausia', 'ivertintos', 'zymos', 'padaliniai','zanras','metai'];

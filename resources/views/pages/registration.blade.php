@@ -55,6 +55,7 @@
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
     <form class="" action="{{URL::to('/store')}}" method="post">
+        @csrf
         <h3>Vartotojo registracija</h3><br>
     <input type="text" name="vardas" placeholder="Įveskite vardą" value=""><br>
         <br>
