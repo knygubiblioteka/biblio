@@ -7,6 +7,72 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        html, body {
+            background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            margin: 0;
+            height: 100%;
+            background-attachment: fixed;
+        }
+
+        .dropdown2{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        select[name="tipas"]
+        {
+            background-color: #A1B0AB;
+            color: black;
+            font-weight: bold;
+            font-size: 15px;
+            width: 250px;
+            border-radius: 12px;
+            height: 25px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        input[value="Rodyti"]
+        {
+            background-color: #A1B0AB;
+            color: black;
+            font-weight: bold;
+            font-size: 15px;
+            width: 100px;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+        }
+        input:hover {
+            background-color: #907D8D;
+            color: black;
+            font-family: 'Nunito', sans-serif;
+        }
+        input
+        {
+            background-color: #A1B0AB;
+            color: black;
+            font-weight: bold;
+            font-size: 15px;
+            width: 150px;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+        }
+        table{
+            position: absolute;
+            right: 145px;
+        }
+        h3{
+            position: absolute;
+            right: 300px;
+            top:80px;
+            font-size: 15px;
+
+        }
+
+    </style>
 </head>
 
 
@@ -30,7 +96,7 @@
 </nav>
 
 <body>
-<center>
+<html>
 
     <h2>Krepšelis</h2>
 
@@ -63,9 +129,10 @@
             <td>1945</td>
             <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
         </tr>
-        </tbody>
+        <input type="submit" value="Patvirtinti!">
+        <center>
+        <tbody>
     </table>
 
-    <input type="submit" value="Patvirtinti!">
-    <center>
-        <body>
+
+</html>
