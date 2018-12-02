@@ -95,6 +95,7 @@
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
             <li><a href="#">Page 2</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
+            <li class="{{Request::is('/UnitManagement')?'active':null }}"><a href="{{url('/UnitManagement')}}">Padaliniu valdymas</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="{{Request::is('/')?'active':null}}"><a href="{{url('/')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>

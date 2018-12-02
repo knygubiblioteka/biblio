@@ -50,3 +50,6 @@ Route::get('/customerReports', function () {
 Route::get('/customerBasket', function () {
     return view('pages.customerBasket');
 });
+Route::get('/UnitManagement', function () {
+    return view('pages.UnitManagement');
+});
