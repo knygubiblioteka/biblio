@@ -20,12 +20,12 @@ class UserController extends Controller
         $gimimo_data=$request->input('gimimo_data');
         $mob_numeris=$request->input('mob_numeris');
         $miestas=$request->input('miestas');
-        $lytis=$request->input('lytis');
+
         $el_pastas=$request->input('el_pastas');
         $slaptazodis=$request->input('slaptazodis');
 
         echo DB::insert('insert into vartotojas(vardas, pavarde, gimimo_data, prisijungimo_vardas, slaptazodis, mob_numeris, el_pastas, miestas, 
-lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_data, $prisijungimo_vardas, $slaptazodis, $mob_numeris, $el_pastas, $miestas, $lytis, null]);
+lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_data, $prisijungimo_vardas, $slaptazodis, $mob_numeris, $el_pastas, $miestas, null, null]);
 
         return redirect('/login');
 

@@ -68,8 +68,6 @@
         <br>
     <input type="text" name="miestas" placeholder="Įveskite miestą" value=""><br>
         <br>
-    <input type="text" name="lytis" placeholder="Pasirinkite" value=""><br>
-        <br>
     <input type="email" name="el_pastas" placeholder="Įveskite el. paštą" value=""><br>
         <br>
     <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" value=""><br>
