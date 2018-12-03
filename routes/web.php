@@ -22,6 +22,9 @@ Route::post('/store', 'UserController@store');
 Route::get('/login', function () {
     return view('pages.login');
 });
+Route::post('/projektas/public/catalog', function () {
+    return view('pages.catalog');
+});
 
 Route::post('/logs', 'UserController@logs');
 
