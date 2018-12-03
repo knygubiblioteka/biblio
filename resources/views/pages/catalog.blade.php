@@ -1,4 +1,55 @@
-<!DOCTYPE html>
+<?php
+
+if(isset($_POST['delete']))
+{
+    $id = $_POST['id_Knyga'];
+    //    echo $id;
+    // search in all table columns
+    // using concat mysql function
+    $query = "DELETE FROM knyga WHERE `id_Knyga`=$id";
+    // $query = "SELECT * FROM knyga";
+    $search_result = filterTable($query);
+
+}
+
+if(isset($_POST['search']))
+{
+    $valueToSearch = $_POST['valueToSearch'];
+    // search in all table columns
+    // using concat mysql function
+    $query = "SELECT * FROM knyga WHERE CONCAT(`pavadinimas`, `autorius`) LIKE '%".$valueToSearch."%'";
+    $search_result = filterTable($query);
+
+}
+
+else if(isset($_POST['filtruoti']))
+{
+    $valueToSearch = $_POST['filtr'];
+    // search in all table columns
+    // using concat mysql function
+    if($valueToSearch==0)
+        $query = "SELECT * FROM knyga";
+    else
+        $query = "SELECT * FROM knyga WHERE `zanras`=$valueToSearch";
+    $search_result = filterTable($query);
+
+}
+
+else {
+    $query = "SELECT * FROM knyga";
+    $search_result = filterTable($query);
+}
+// function to connect and execute the query
+function filterTable($query)
+{
+    $connect = mysqli_connect("localhost", "root", "", "biblioteka");
+    $filter_Result = mysqli_query($connect, $query);
+    return $filter_Result;
+}
+
+?>
+
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Biblioteka</title>
@@ -9,80 +60,70 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
-    * {box-sizing: border-box;}
 
-    body {
+    html, body {
+        background: linear-gradient(to bottom right, #A1B0AB, #E0CBA8);
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
         margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        height: 100%;
+        background-attachment: fixed;
     }
 
-    .topnav {
-        overflow: hidden;
-        background-color: #e9e9e9;
+    .dropdown2{
+        font-size: 20px;
+        font-weight: bold;
     }
-
-    .topnav a {
-        float: left;
-        display: block;
+    select[name="tipas"]
+    {
+        background-color: #A1B0AB;
         color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
+        font-weight: bold;
+        font-size: 15px;
+        width: 250px;
+        border-radius: 12px;
+        height: 25px;
+        font-family: 'Nunito', sans-serif;
     }
 
-    .topnav a:hover {
-        background-color: #ddd;
+    input[value="Rodyti"]
+    {
+        background-color: #A1B0AB;
         color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 100px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+    input:hover {
+        background-color: #907D8D;
+        color: black;
+        font-family: 'Nunito', sans-serif;
+    }
+    input[type="date"]
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 150px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+    table{
+        position: absolute;
+        right: 145px;
+    }
+    h3{
+        position: absolute;
+        right: 300px;
+        top:80px;
+        font-size: 15px;
+
     }
 
-    .topnav a.active {
-        background-color: #2196F3;
-        color: white;
-    }
-
-    .topnav .search-container {
-        float: right;
-    }
-
-    .topnav input[type=text] {
-        padding: 6px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
-    }
-
-    .topnav .search-container button {
-        float: right;
-        padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-    }
-
-    .topnav .search-container button:hover {
-        background: #ccc;
-    }
-
-    @media screen and (max-width: 600px) {
-        .topnav .search-container {
-            float: none;
-        }
-        .topnav a, .topnav input[type=text], .topnav .search-container button {
-            float: none;
-            display: block;
-            text-align: left;
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-        }
-        .topnav input[type=text] {
-            border: 1px solid #ccc;
-        }
-    }
 </style>
 <body>
 
@@ -97,47 +138,43 @@
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
             <li><a href="#">Page 2</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
-            <li class="{{Request::is('/UnitManagement')?'active':null }}"><a href="{{url('/UnitManagement')}}">Padaliniu valdymas</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="{{Request::is('/')?'active':null}}"><a href="{{url('/')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
         </ul>
     </div>
 </nav>
-<ul class="nav navbar-nav">
-<div class="search-container">
-        <input type="text" placeholder="Ieškoti.." name="search">
-    <input type="submit" value="Rodyti">
-</div>
-</ul>
-<div style='text-align:center'>
+<form action="/projektas/public/catalog" method="post">
+    <div style='text-align:center'>
 
         <h2>Knygų katalogas</h2>
 
-</div>
-<div style="text-align: right" >
-    <td class="{{Request::is('/book')?'active':null }}"><a href="{{url('/book')}}">Pridėti naują knygą</a></td>
-</div>
+    </div>
+    <div style="text-align: right" >
+        <td class="{{Request::is('/book')?'active':null }}"><a href="{{url('/book')}}">Pridėti naują knygą</a></td>
+        <br>
+        <input type="text" name="id_Knyga" placeholder="Įveskite knygos ID">
+        <td> <input type='submit' name='delete' value="Šalinti knygą" onclick="confirm('Ar tikrai norite pašalinti knygą?')"></td>
+    </div>
 
 
-</body>
-<body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <br>
-            <br>
-            <!-- DROP DOWN-->
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <input type="text" name="valueToSearch" placeholder="Ieškoti...">
+    <input type="submit" name="search" value="Rodyti"><br><br>
+
+    <br>
+    <br>
+    <!-- DROP DOWN-->
+    <div class="container">
+
+        <div class="col-xs-12 col-md-8">
             <br>
             <br>
             <!-- DROP DOWN-->
             <div class="dropdown2">Pasirinkite knygų žanrą:
                 <br>
                 <br>
-                <select name="tipas">
+                <select name="filtr" class="dropdown2">
+                    <option value="0"></option>
                     <option value="1">Fantastika</option>
                     <option value="2">Romanas</option>
                     <option value="3">Novelė</option>
@@ -148,16 +185,20 @@
                     <option value="8">Detektyvas</option>
                 </select>
             </div>
-<br>
-            <input type="submit" value="Rodyti">
+
+            <br>
+            <input type="submit" name="filtruoti" value="Rodyti"><br><br>
             <br>
             <br>
+
             <br>
             <br>
-            <table class="table table-hover">
+
+
+            <table class="table table-hover" >
                 <thead>
                 <tr>
-                    <th>Nr.</th>
+                    <th>ID</th>
                     <th>Pavadinimas</th>
                     <th>Autorius</th>
                     <th>Žanras</th>
@@ -165,106 +206,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Tarp pilkų debesų</td>
-                    <td>Rūta Šepetys</td>
-                    <td>Romanas</td>
-                    <td>2011</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
 
-                    <td> <a href=>Šalinti</a></td>
-                </tr>
+
+
+                <?php while($row = mysqli_fetch_array($search_result)) :?>
                 <tr>
-                    <td>2</td>
-                    <td>Moe</td>
-                    <td>Melvin Burges</td>
-                    <td>Drama</td>
-                    <td>2012</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
+                    <td><?php echo $row['id_Knyga'];?></td>
+                    <td><?php echo $row['pavadinimas'];?></td>
+                    <td><?php echo $row['autorius'];?></td>
+                    <td><?php echo $row['zanras'];?></td>
+                    <td><?php echo $row['isleidimo_data'];?></td>
+                    <td> <a href=>Peržiūrėti</a></td>
+
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Altorių šešėly</td>
-                    <td>Vincas Mykolaitis-Putinas</td>
-                    <td>Romanas</td>
-                    <td>1933</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Balta drobulė</td>
-                    <td>Antanas Škėma</td>
-                    <td>Romanas</td>
-                    <td>1958</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Dėdės ir dėdienės</td>
-                    <td>Juozas Tumas-Vaižgantas</td>
-                    <td>Romanas</td>
-                    <td>1929</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Anykščių šilelis</td>
-                    <td>Antanas Baranauskas</td>
-                    <td>Romanas</td>
-                    <td>1958</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Sename dvare</td>
-                    <td>Šatrijos Ragana</td>
-                    <td>Romanas</td>
-                    <td>1922</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Ponas Tadas</td>
-                    <td>Adomas Mickevičius</td>
-                    <td>Poema</td>
-                    <td>1834</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Lazda</td>
-                    <td>Jonas Biliūnas</td>
-                    <td>Novelė</td>
-                    <td>1902</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Lakštingala negali nečiulbėti</td>
-                    <td>Salomėja Nėris</td>
-                    <td>Poezija</td>
-                    <td>1945</td>
-                    <td class="{{Request::is('/bookInfo')?'active':null }}"><a href="{{url('/bookInfo')}}">Peržiūrėti</a></td>
-                    <td>  <a href=>Šalinti</a></td>
-                </tr>
+
+                <?php endwhile;?>
                 </tbody>
             </table>
 
         </div>
     </div>
-</div>
-        </div>
     </div>
-</div>
+</form>
+
 </body>
 </html>
 
