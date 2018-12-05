@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('pages.welcome');
 });
+
+Route::get('/welcome', function () {
+    return view('pages.welcome');
+});
 Route::get('/registration', function () {
     return view('pages.registration');
 });
