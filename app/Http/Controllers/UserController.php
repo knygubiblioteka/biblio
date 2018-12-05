@@ -51,22 +51,24 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $prisijungimo_vardas=$request->input('prisijungimo_vardas');
         $slaptazodis=$request->input('slaptazodis');
 
-        $data= DB::select('select id_Vartotojas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-        if(count($data))
+        //$data= DB::select('select id_Vartotojas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
+
+        $dbc=mysqli_connect('localhost','root', '','biblioteka');
+        if(!$dbc){
+            die ("Negaliu prisijungti prie MySQL:"	.mysqli_error($dbc));
+        }
+        $sql="select * from vartotojas where prisijungimo_vardas='$prisijungimo_vardas' and slaptazodis='$slaptazodis'";
+       // $data = mysqli_query($dbc, $sql);
+        if($data = mysqli_query($dbc, $sql))
         {
             $_SESSION["username"] = $prisijungimo_vardas;
-         //   $result= DB::select('select vardas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-           // var_dump($result);
-            //die;
+            $row = mysqli_fetch_assoc($data);
 
-                    $_SESSION["name"] = DB::select('select vardas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-                  //  var_dump( $_SESSION["name"]);
-                 //   die;
-                    $_SESSION["surname"] = DB::select('select pavarde from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-                    $_SESSION["phone"] = DB::select('select mob_numeris from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-                    $_SESSION["el"] = DB::select('select el_pastas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-                    $_SESSION["city"] = DB::select('select miestas from vartotojas where prisijungimo_vardas=? and slaptazodis=?',[$prisijungimo_vardas, $slaptazodis]);
-
+            $_SESSION["name"] = $row['vardas'];
+            $_SESSION["surname"] = $row['pavarde'];
+            $_SESSION["phone"] = $row['mob_numeris'];
+            $_SESSION["el"] = $row['el_pastas'];
+            $_SESSION["city"]= $row['miestas'];
 
     return redirect('/catalog');
 

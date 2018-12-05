@@ -86,10 +86,10 @@ session_start();
 
     <form>
         Vardas:<br>
-        <input type="text" name="name" value="vardenis">
+        <input type="text" name="name" value="<?php echo $_SESSION['name']; ?>">
         <br><br>
         Pavarde:<br>
-        <input type="text" name="surname" value="Pavardenis"><br><br>
+        <input type="text" name="surname" value="<?php echo $_SESSION['surname']; ?>"><br><br>
         Login:<br>
         <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>"><br>
         <br>Gimimo data:<br>
@@ -104,13 +104,13 @@ session_start();
             </select>
             <br><br>
             Telefono numeris:<br>
-            <input type="text" name="numer" value="86********"><br>
+            <input type="text" name="numer" value="<?php echo $_SESSION['phone']; ?>"><br>
             <br>
             El. Paštas:<br>
-            <input type="text" name="email" value="ttt@gmail.com"><br>
+            <input type="text" name="email" value="<?php echo $_SESSION['el']; ?>"><br>
             <br>
             Miestas:<br>
-            <input type="text" name="city" value="Kaunas"><br>
+            <input type="text" name="city" value="<?php echo $_SESSION['city']; ?>"><br>
             <br>
             naujas slaptažodis:<br>
             <input type="text" name="password" value="****"><br>
