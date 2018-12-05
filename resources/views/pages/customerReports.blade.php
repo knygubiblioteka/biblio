@@ -109,6 +109,9 @@
     <input type="submit" value="Rodyti">
     <br><br>
     <br><br>
+</center>
+<div class="container">
+    <div class="col-xs-12 col-md-8">
     <table class="table table-hover">
         <thead>
         <tr>
@@ -139,5 +142,7 @@
         </tr>
         </tbody>
     </table>
-    <center>
-        <body>
+    </div>
+</div>
+</body>
+</html>

@@ -94,7 +94,7 @@
     <body>
     <div class="container">
             <div class="col-xs-12 col-md-8">
-                <form action ="/showtable" method = "get">
+                <form action ="{{URL::to('/showtable')}}" method = "get">
                 <div class="dropdown2">Pasirinkite ataskaitos tipą
                     <br>
                     <br>
@@ -106,34 +106,28 @@
                         <option value="5">Populiariausios knygos pagal žanrą</option>
                         <option value="6">Populiariausios knygos pagal metus</option>
                     </select>
-                    <input type="submit" value="Rodyti">   <input type="date" name="from"/><input type="date" name="to"/>
+                    <input name = "submit" type="submit" value="Rodyti">   <input type="date" name="from"/><input type="date" name="to"/>
 
                 </div>
                 <br>
-                    <table class="table table-hover">
+                    <table style="width:100%">
 
                         <tr>
                             <th>Nr.</th>
                             <th>Pavadinimas</th>
                             <th>Autorius</th>
-                            <th>Žanras</th>
                             <th>Metai</th>
                         </tr>
-
-                        {{$sumting = 1}}
-                        @foreach($knyga as $knyga1)
-                        <tr>
-                            <td>{{$knyga1->id_Knyga}}</td>
-                            <td>{{$knyga1->pavadinimas}}</td>
-                            <td>{{$knyga1->autorius}}</td>
-                            <td>{{$knyga1->zanras}}</td>
-                            <td>{{$knyga1->isleidimo_data}}</td>
-                            {{$sumting = $sumting + 1}}
-                        </tr>
-                        @endforeach
+                            <tr>
+                                <td>{{$Knygos->id_Knyga}}</td>
+                                <td>{{$Knygos->pavadinimas}}</td>
+                                <td>{{$Knygos->autorius}}</td>
+                                <td>{{$Knygos->isleidimo_data}}</td>
+                            </tr>
                     </table>
                 </form>
         </div>
     </div>
     </body>
     </html>
+

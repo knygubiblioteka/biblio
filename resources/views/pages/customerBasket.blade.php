@@ -100,10 +100,13 @@
 <html>
 
     <h2>Krepšelis</h2>
-
-
     <br><br>
     <br><br>
+    <input type="submit" value="Patvirtinti!">
+    <br><br>
+
+    <div class="container">
+        <div class="col-xs-12 col-md-8">
     <table class="table table-hover">
         <thead>
         <tr>
@@ -130,10 +133,9 @@
             <td>1945</td>
             <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
         </tr>
-        <input type="submit" value="Patvirtinti!">
-        <center>
-        <tbody>
+        </thead>
     </table>
-
-
+        </div>
+    </div>
 </html>
+</body>
