@@ -28,6 +28,8 @@ Route::post('/projektas/public/catalog', function () {
 
 Route::post('/logs', 'UserController@logs');
 
+Route::get('/editclient', 'UserController@editclient');
+
 Route::get('/reports', function () {
     return view('pages.reports');
 })->name('reports');

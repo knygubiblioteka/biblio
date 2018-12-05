@@ -84,25 +84,18 @@ session_start();
     <br>
     <h2>Duomenų redagavimas</h2>
 
-    <form>
+
+    <form class="" action="{{URL::to('/editclient')}}" method="get">
         Vardas:<br>
         <input type="text" name="name" value="<?php echo $_SESSION['name']; ?>">
         <br><br>
         Pavarde:<br>
         <input type="text" name="surname" value="<?php echo $_SESSION['surname']; ?>"><br><br>
         Login:<br>
-        <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>"><br>
-        <br>Gimimo data:<br>
-        <input type="date" name="data"><br>
-        <br>
+        <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>" readonly="readonly"><br>
 
-        Lytis   <div class="dropdown">
-            <select name="tipas">
-                <option value="man">Vyras</option>
-                <option value="woman">Moteris</option>
 
-            </select>
-            <br><br>
+       <br>
             Telefono numeris:<br>
             <input type="text" name="numer" value="<?php echo $_SESSION['phone']; ?>"><br>
             <br>
