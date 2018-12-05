@@ -30,6 +30,8 @@ Route::post('/logs', 'UserController@logs');
 
 Route::get('/editclient', 'UserController@editclient');
 
+Route::get('/logout', 'UserController@logout');
+
 Route::get('/reports', function () {
     return view('pages.reports');
 })->name('reports');

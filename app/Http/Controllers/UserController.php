@@ -110,38 +110,6 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
 
 
 
-        /*if ($slaptazodis == $slaptazodis2 ) {
-
-            if (mysqli_query($dbc, $sql)) {
-                $_SESSION["name"] = $vardas;
-                $_SESSION["surname"] = $pavarde;
-                $_SESSION["phone"] = $mob_numeris;
-                $_SESSION["el"] = $el_pastas;
-                $_SESSION["city"] = $miestas;
-                $_SESSION["password"]=$slaptazodis;
-
-                return redirect('/editClient');
-            } else {
-                echo "Klaida";
-            }
-
-        }elseif ($slaptazodis='')
-        {
-            if (mysqli_query($dbc, $sql2)) {
-                $_SESSION["name"] = $vardas;
-                $_SESSION["surname"] = $pavarde;
-                $_SESSION["phone"] = $mob_numeris;
-                $_SESSION["el"] = $el_pastas;
-                $_SESSION["city"] = $miestas;
-
-                return redirect('/editClient');
-            } else {
-                echo "Klaida";
-            }
-
-        }*/
-        //var_dump($slaptazodis2);
-
         if ($slaptazodis=='')
         {
             var_dump($vardas);
@@ -177,6 +145,21 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             return redirect('/editClient');
         };
 
+
+    }
+
+
+    public function logout(request $request)
+    {
+        $_SESSION["name"] = NULL;
+        $_SESSION["surname"] = NULL;
+        $_SESSION["phone"] = NULL;
+        $_SESSION["el"] = NULL;
+        $_SESSION["city"] = NULL;
+        $_SESSION["password"]=NULL;
+        $_SESSION["error"]=NULL;
+        $_SESSION["username"] = NULL;
+        return redirect('/welcome');
 
     }
 }
