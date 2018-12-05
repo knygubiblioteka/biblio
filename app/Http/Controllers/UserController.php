@@ -85,30 +85,98 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
     public function editclient(request $request)
     {
         //$data= DB::select('select id_Vartotojas from vartotojas where prisijungimo_vardas=?',$_SESSION["username"]);
-        $vardas=$request->input('name');
+        $vardas = $request->input('name');
 
-        $pavarde=$request->input('surname');
-        $mob_numeris=$request->input('numer');
-        $miestas=$request->input('city');
-        $el_pastas=$request->input('email');
+        $pavarde = $request->input('surname');
+        $mob_numeris = $request->input('numer');
+        $miestas = $request->input('city');
+        $el_pastas = $request->input('email');
+        $slaptazodis = $request->input('password');
+        $slaptazodis2 = $request->input('password2');
+        //var_dump($slaptazodis);
+       // var_dump($slaptazodis2);
+       // die;
 
-        $_SESSION["name"] = $vardas;
-        $_SESSION["surname"] = $pavarde;
-        $_SESSION["phone"] = $mob_numeris;
-        $_SESSION["el"] = $el_pastas;
-        $_SESSION["city"]= $miestas;
 
 
-        $usernm=$_SESSION["username"];
-        $passwd=$_SESSION["password"];
-        $dbc=mysqli_connect('localhost','root', '','biblioteka');
-        if(!$dbc){
-            die ("Negaliu prisijungti prie MySQL:"	.mysqli_error($dbc));
+        $usernm = $_SESSION["username"];
+        $passwd = $_SESSION["password"];
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
         }
-        $sql="UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
-        if(mysqli_query($dbc, $sql)) {
-           return redirect('/editClient');
-        }
-        else{ echo "Klaida";}
+        $sql = "UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas', slaptazodis ='$slaptazodis'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
+        $sql2 = "UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
+
+
+
+        /*if ($slaptazodis == $slaptazodis2 ) {
+
+            if (mysqli_query($dbc, $sql)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+                $_SESSION["password"]=$slaptazodis;
+
+                return redirect('/editClient');
+            } else {
+                echo "Klaida";
+            }
+
+        }elseif ($slaptazodis='')
+        {
+            if (mysqli_query($dbc, $sql2)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+
+                return redirect('/editClient');
+            } else {
+                echo "Klaida";
+            }
+
+        }*/
+        //var_dump($slaptazodis2);
+
+        if ($slaptazodis=='')
+        {
+            var_dump($vardas);
+
+            if (mysqli_query($dbc, $sql2)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+
+                return redirect('/editClient');
+            } else {
+                echo "Klaida";
+            }
+
+        } elseif($slaptazodis == $slaptazodis2)
+        {
+            var_dump($pavarde);
+
+            if (mysqli_query($dbc, $sql)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+                $_SESSION["password"]=$slaptazodis;
+
+                return redirect('/editClient');
+            }
+
+        }else{$_SESSION["error"]="klaida";
+            return redirect('/editClient');
+        };
+
+
     }
 }

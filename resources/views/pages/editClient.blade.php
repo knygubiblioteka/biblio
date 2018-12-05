@@ -28,7 +28,12 @@ session_start();
         font-weight: bold;
         font-size: 15px;
     }
-
+    h4 {
+        color: #ff0000;
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+    }
     button
     {
         background-color: #A1B0AB;
@@ -106,12 +111,19 @@ session_start();
             <input type="text" name="city" value="<?php echo $_SESSION['city']; ?>"><br>
             <br>
             naujas slaptažodis:<br>
-            <input type="text" name="password" value="****"><br>
+            <input type="password" name="password" value=""><br>
             <br>
             Pakartoti slaptažodį:<br>
-            <input type="text" name="password2" value="*****"><br>
+            <input type="password" name="password2" value=""><br>
             <br>
             <input type="submit" value="Pakeisti">
+        <?php
+        if (   $_SESSION['error']=='klaida'  )
+        {
+           echo "<h4>Neteisingai įvestas slaptažodis</h4>";
+            $_SESSION['error'] = "";
+        }
+            ?>
     </form>
 </center>
 
