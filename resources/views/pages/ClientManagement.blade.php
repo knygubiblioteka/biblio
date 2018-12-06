@@ -114,7 +114,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Ar tikrai norite pašalintin paskyrą?</p>
-            <input type="submit" value="Patvirtinti">
+            <a href=../public/deleteclient><input id="Btn2" type="submit" value="Patvirtinti"></a>
         </div>
     </div>
     <script>
@@ -123,15 +123,22 @@
 
         // Get the button that opens the modal
         var btn = document.getElementById("myBtn");
-
+        var btn2 = document.getElementById("Btn2");
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks the button, open the modal
         btn.onclick = function() {
-            modal.style.display = "block";
-        }
 
+            modal.style.display = "block";
+
+        }
+        btn2.onclick =function()
+        {
+            modal.style.display = "none";
+           // href="../public/deleteclient";
+            //return redirect('/deleteclient');
+        }
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
@@ -145,5 +152,5 @@
         }
     </script>
 
-    <center>
-        <body>
+    </center>
+        </body>
