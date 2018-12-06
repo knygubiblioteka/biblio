@@ -173,6 +173,31 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
 
     }
 
+    public function deleteclient(request $request)
+    {
+        $usernm = $_SESSION["username"];
+        $passwd = $_SESSION["password"];
+
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $sql = "DELETE vartotojas from vartotojas where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
+        if (mysqli_query($dbc, $sql)) {
+            $_SESSION["name"] = NULL;
+            $_SESSION["surname"] = NULL;
+            $_SESSION["phone"] = NULL;
+            $_SESSION["el"] = NULL;
+            $_SESSION["city"] = NULL;
+            $_SESSION["password"]=NULL;
+            $_SESSION["username"]=NULL;
+
+            return redirect('/welcome');
+        }
+        return redirect('/catalog');
+
+    }
+
 
 
 }

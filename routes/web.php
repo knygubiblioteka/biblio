@@ -11,7 +11,13 @@
 |
 */
 
+
+
 Route::get('/', 'UserController@continue');
+
+//Route::get('/deleteclient', 'UserController@deleteclient');
+
+Route::get('/deleteclient', 'UserController@deleteclient');
 
 Route::get('/welcome', function () {
     return view('pages.welcome');

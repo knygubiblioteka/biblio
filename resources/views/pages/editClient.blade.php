@@ -78,7 +78,7 @@ session_start();
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
-            <li class="{{Request::is('/')?'active':null}}"><a href="welcome.blade.php"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
+            <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
     </div>
 </nav>
 
