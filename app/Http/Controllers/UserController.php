@@ -58,11 +58,18 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             die ("Negaliu prisijungti prie MySQL:"	.mysqli_error($dbc));
         }
         $sql="select * from vartotojas where prisijungimo_vardas='$prisijungimo_vardas' and slaptazodis='$slaptazodis'";
-        if($data = mysqli_query($dbc, $sql))
+        $data = mysqli_query($dbc, $sql);
+        $row = mysqli_fetch_assoc($data);
+
+        if(is_null($row['vardas']))
         {
+            echo "klaida";
+
+        }
+        else{
             $_SESSION["username"] = $prisijungimo_vardas;
             $_SESSION["password"] = $slaptazodis;
-            $row = mysqli_fetch_assoc($data);
+
 
             $_SESSION["name"] = $row['vardas'];
             $_SESSION["surname"] = $row['pavarde'];
@@ -71,14 +78,10 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             $_SESSION["city"]= $row['miestas'];
             //$_SESSION["data"] = $row['gimimo_data'];
             //$_SESSION["sex"] = $row['lytis'];
-    return redirect('/catalog');
+            return redirect('/catalog');
 
         }
-        else
-        {
-            echo "Neteisingi prisijungimo duomenys";
 
-        }
     }
 
 
@@ -94,8 +97,8 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $slaptazodis = $request->input('password');
         $slaptazodis2 = $request->input('password2');
         //var_dump($slaptazodis);
-       // var_dump($slaptazodis2);
-       // die;
+        // var_dump($slaptazodis2);
+        // die;
 
 
 
@@ -109,6 +112,38 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $sql2 = "UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
 
 
+
+        /*if ($slaptazodis == $slaptazodis2 ) {
+
+            if (mysqli_query($dbc, $sql)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+                $_SESSION["password"]=$slaptazodis;
+
+                return redirect('/editClient');
+            } else {
+                echo "Klaida";
+            }
+
+        }elseif ($slaptazodis='')
+        {
+            if (mysqli_query($dbc, $sql2)) {
+                $_SESSION["name"] = $vardas;
+                $_SESSION["surname"] = $pavarde;
+                $_SESSION["phone"] = $mob_numeris;
+                $_SESSION["el"] = $el_pastas;
+                $_SESSION["city"] = $miestas;
+
+                return redirect('/editClient');
+            } else {
+                echo "Klaida";
+            }
+
+        }*/
+        //var_dump($slaptazodis2);
 
         if ($slaptazodis=='')
         {
@@ -145,21 +180,6 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             return redirect('/editClient');
         };
 
-
-    }
-
-
-    public function logout(request $request)
-    {
-        $_SESSION["name"] = NULL;
-        $_SESSION["surname"] = NULL;
-        $_SESSION["phone"] = NULL;
-        $_SESSION["el"] = NULL;
-        $_SESSION["city"] = NULL;
-        $_SESSION["password"]=NULL;
-        $_SESSION["error"]=NULL;
-        $_SESSION["username"] = NULL;
-        return redirect('/welcome');
 
     }
 }
