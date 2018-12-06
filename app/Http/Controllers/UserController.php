@@ -96,11 +96,6 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $el_pastas = $request->input('email');
         $slaptazodis = $request->input('password');
         $slaptazodis2 = $request->input('password2');
-        //var_dump($slaptazodis);
-        // var_dump($slaptazodis2);
-        // die;
-
-
 
         $usernm = $_SESSION["username"];
         $passwd = $_SESSION["password"];
@@ -111,39 +106,6 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $sql = "UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas', slaptazodis ='$slaptazodis'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
         $sql2 = "UPDATE vartotojas SET vardas='$vardas',pavarde='$pavarde',mob_numeris='$mob_numeris',miestas='$miestas', el_pastas='$el_pastas'  where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
 
-
-
-        /*if ($slaptazodis == $slaptazodis2 ) {
-
-            if (mysqli_query($dbc, $sql)) {
-                $_SESSION["name"] = $vardas;
-                $_SESSION["surname"] = $pavarde;
-                $_SESSION["phone"] = $mob_numeris;
-                $_SESSION["el"] = $el_pastas;
-                $_SESSION["city"] = $miestas;
-                $_SESSION["password"]=$slaptazodis;
-
-                return redirect('/editClient');
-            } else {
-                echo "Klaida";
-            }
-
-        }elseif ($slaptazodis='')
-        {
-            if (mysqli_query($dbc, $sql2)) {
-                $_SESSION["name"] = $vardas;
-                $_SESSION["surname"] = $pavarde;
-                $_SESSION["phone"] = $mob_numeris;
-                $_SESSION["el"] = $el_pastas;
-                $_SESSION["city"] = $miestas;
-
-                return redirect('/editClient');
-            } else {
-                echo "Klaida";
-            }
-
-        }*/
-        //var_dump($slaptazodis2);
 
         if ($slaptazodis=='')
         {
@@ -182,4 +144,35 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
 
 
     }
+
+
+
+
+    public function logout(request $request)
+    {
+        $_SESSION["name"] = NULL;
+        $_SESSION["surname"] = NULL;
+        $_SESSION["phone"] = NULL;
+        $_SESSION["el"] = NULL;
+        $_SESSION["city"] = NULL;
+        $_SESSION["password"]=NULL;
+        $_SESSION["username"]=NULL;
+
+        return redirect('/welcome');
+    }
+
+    public function continue(request $request)
+    {
+        if(is_null($_SESSION["username"]))
+        {
+            return redirect('/welcome');
+        }
+        else{
+            return redirect('/catalog');
+        }
+
+    }
+
+
+
 }
