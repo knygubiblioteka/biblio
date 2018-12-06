@@ -163,13 +163,13 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
 
     public function continue(request $request)
     {
-        //if(is_null($_SESSION["username"]))
-        //{
+        if(empty($_SESSION["username"]))
+        {
             return redirect('/welcome');
-      //  }
-      //  else{
-       //     return redirect('/catalog');
-       // }
+        }
+        else{
+            return redirect('/catalog');
+        }
 
     }
 
