@@ -118,11 +118,15 @@ session_start();
             <br>
             <input type="submit" value="Pakeisti">
         <?php
+        if(!empty($_SESSION['error']))
+            {
+
+
         if (   $_SESSION['error']=='klaida'  )
         {
            echo "<h4>Neteisingai įvestas slaptažodis</h4>";
             $_SESSION['error'] = "";
-        }
+        }}
             ?>
     </form>
 </center>
