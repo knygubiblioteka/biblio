@@ -34,7 +34,36 @@ class ReportsController extends Controller
                 echo 'pasirinkta penki';
                 break;
             case '6':
-                $id_Knyga = DB::table('knyga')->where('isleidimo_data', '>=',$str_start_date)->
+                $dbc=mysqli_connect('localhost','root', '','biblioteka');
+                if(!$dbc){
+                    die ("Negaliu prisijungti prie MySQL:"	.mysqli_error($dbc));
+                }
+                //  nuskaityti viska bei spausdinti
+                $sql = "SELECT * FROM knyga";
+                $result = mysqli_query($dbc, $sql);
+
+                echo "<zinutes=\"1\">
+                         <tr>
+                            <th>Nr.</th>
+                            <th>Pavadinimas</th>
+                            <th>Autorius</th>
+                            <th>Metai</th>
+                        </tr>";
+
+                {while($row = mysqli_fetch_assoc($result))
+                {
+                   /* var_dump($row);
+                    die;*/
+                    echo "<tr><td>".$row['id_Knyga']."</td><td>".$row['pavadinimas']."</td><td>".$row['autorius']."</td><td>".$row['isleidimo_data']."</td></tr>";
+                }
+                };
+
+                if(mysqli_query($dbc, $sql)) {
+                    return redirect('/reports')->with('row',$row);
+                  //  return view('pages.reports', compact('row'));
+                }
+                else{ echo "Klaida";}
+             /*   $id_Knyga = DB::table('knyga')->where('isleidimo_data', '>=',$str_start_date)->
                 where('isleidimo_data','<=',$str_end_date)->value('pavadinimas');
 
                 $pavadinimas = DB::table('knyga')->where('isleidimo_data', '>=',$str_start_date)->
@@ -47,7 +76,7 @@ class ReportsController extends Controller
                 where('isleidimo_data','<=',$str_end_date)->value('isleidimo_data');
 
                 $Knygos = DB::table('knyga')->where('isleidimo_data', '>=',$str_start_date)->
-                where('isleidimo_data','<=',$str_end_date)->get();
+                where('isleidimo_data','<=',$str_end_date)->get();*/
 
                 // $results = DB::select('select id_Knyga from knyga where isleidimo_data>=$str_start_date and isleidimo_data<=$str_end_date', ['id' => 1]);
                 // echo $knyga;
@@ -57,7 +86,7 @@ class ReportsController extends Controller
                     'isleidimo_data' => $isleidimo_data);*/
 
                 // return view('pages.welcome')->with($knygos);
-                return view('pages.reports', compact('Knygos'));
+              //  return view('pages.reports', compact('Knygos'));
                 break;
         }
        // return redirect('/reports');

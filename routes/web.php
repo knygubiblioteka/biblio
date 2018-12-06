@@ -42,7 +42,8 @@ Route::get('/logout', 'UserController@logout');
 
 Route::get('/reports', function () {
     return view('pages.reports');
-})->name('reports');
+});
+
 
 Route::get('/showtable', 'ReportsController@showtable');
 
