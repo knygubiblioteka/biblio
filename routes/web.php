@@ -32,7 +32,8 @@ Route::get('/editclient', 'UserController@editclient');
 
 Route::get('/reports', function () {
     return view('pages.reports');
-})->name('reports');
+});
+
 
 Route::get('/showtable', 'ReportsController@showtable');
 
