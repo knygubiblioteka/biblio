@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,7 +96,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
-            <li class="{{Request::is('/')?'active':null}}"><a href="welcome.blade.php"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
+            <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>         </ul>
     </div>
 </nav>
 <body>
@@ -100,49 +104,67 @@
 
     <h2>Ataskaitos</h2>
 
-    Pasirinkite ataskaitos datą nuo:<br>
-    <input type="date" name="datafrom" >
-    <br><br>
-    Pasirinkite ataskaitos datą iki:<br>
-    <input type="date" name="datato" >
-    <br><br>
-    <input type="submit" value="Rodyti">
-    <br><br>
-    <br><br>
-</center>
-<div class="container">
-    <div class="col-xs-12 col-md-8">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nr.</th>
-            <th>Pavadinimas</th>
-            <th>Paėmimo data</th>
-            <th>Grąžinimo data</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Tarp pilkų debesų</td>
-            <td>2018-02-26</td>
-            <td>2018-03-15</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Moe</td>
-            <td>2018-02-26</td>
-            <td>2018-03-15</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Altorių šešėly</td>
-            <td>2018-03-15</td>
-            <td>2018-04-29</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="" action="{{URL::to('/reportslist')}}" method="get">
+                Pasirinkite ataskaitos datą nuo:<br>
+                <input type="date" name="datafrom" value="">
+                <br><br>
+                Pasirinkite ataskaitos datą iki:<br>
+                <input type="date" name="datato" value="">
+                <br><br>
+                <button type=submit name="button">Rodyti</button>
+            </form>
+        </div>
     </div>
-</div>
+
+
+
+
+</center>
+
+
+
+<table class="table table-hover" >
+    <thead>
+    <tr>
+        <th>Nr.</th>
+        <th>Pavadinimas</th>
+        <th>paėmimo data</th>
+        <th>grąžinimo data</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+
+    <?php
+    $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+    if (!$dbc) {
+        die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+    }
+    $sql = $_SESSION["reports"];
+    if (!is_null($sql))
+        {
+            $result = mysqli_query($dbc, $sql);
+        }
+        else {$result=NULL;}
+
+    if (!is_null($result))
+    while($row = mysqli_fetch_array($result)) :?>
+
+    <?php $array =array() ?>
+    <td><?php echo $row['id_Uzsakymas']; ?></td>
+    <td><?php echo $row['pavadinimas'];?></td>
+    <td><?php echo $row['datanuo'];?></td>
+    <td><?php echo $row['dataiki'];?></td>
+
+
+    </tr>
+
+    <?php endwhile;?>
+    </tbody>
+</table>
 </body>
 </html>

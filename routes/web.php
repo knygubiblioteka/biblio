@@ -61,6 +61,8 @@ Route::get('/ClientManagement', function () {
 });
 Route::get('/tagslist', 'UserController@tagslist');
 
+Route::get('/reportslist', 'UserController@reports');
+
 Route::get('/alltagslist', function () {
     return view('pages.tagslist');
 });
