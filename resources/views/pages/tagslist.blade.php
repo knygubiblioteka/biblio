@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,43 +103,55 @@
 <body>
 <html>
 
-    <h2>Krepšelis</h2>
-    <br><br>
-    <br><br>
-    <input type="submit" value="Patvirtinti!">
-    <br><br>
+<h3>Žymos</h3>
+<br><br>
+<?php
+    $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+if (!$dbc) {
+    die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+}
+    $user=$_SESSION['id'];
+    $sql="select * from knyga INNER JOIN zyma on knyga.id_Knyga=zyma.fk_Knygaid_Knyga && zyma.fk_Vartotojasid_Vartotojas=$user";
+    $result = mysqli_query($dbc, $sql);
+    ?>
+<table class="table table-hover" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Pavadinimas</th>
+        <th>Autorius</th>
+        <th>Žanras</th>
+        <th>Metai</th>
+    </tr>
+    </thead>
+    <tbody>
 
-    <div class="container">
-        <div class="col-xs-12 col-md-8">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <td>1</td>
-            <td>Ponas Tadas</td>
-            <td>Adomas Mickevičius</td>
-            <td>Poema</td>
-            <td>1834</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Lazda</td>
-            <td>Jonas Biliūnas</td>
-            <td>Novelė</td>
-            <td>1902</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Lakštingala negali nečiulbėti</td>
-            <td>Salomėja Nėris</td>
-            <td>Poezija</td>
-            <td>1945</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        </thead>
-    </table>
-        </div>
-    </div>
+
+
+    <?php while($row = mysqli_fetch_array($result)) :?>
+
+    <?php $array =array() ?>
+    <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
+    <td><?php echo $row['pavadinimas'];?></td>
+    <td><?php echo $row['autorius'];?></td>
+    <td><?php echo $row['zanras'];?></td>
+    <td><?php echo $row['isleidimo_data'];?></td>
+
+
+    <td> <a href=>Peržiūrėti</a></td>
+
+    </tr>
+
+    <?php endwhile;?>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
 </html>
 </body>

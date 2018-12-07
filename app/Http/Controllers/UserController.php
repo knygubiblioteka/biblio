@@ -38,11 +38,29 @@ class UserController extends Controller
 
         $el_pastas=$request->input('el_pastas');
         $slaptazodis=$request->input('slaptazodis');
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $sql="select * from vartotojas where prisijungimo_vardas='$prisijungimo_vardas' or slaptazodis='$slaptazodis'";
+        $sql2="select * from darbuotojas where prisijungimo_vardas='$prisijungimo_vardas' or slaptazodis='$slaptazodis'";
+        $data = mysqli_query($dbc, $sql);
+        $data2 = mysqli_query($dbc, $sql2);
+        $row = mysqli_fetch_assoc($data);
+        $row2 = mysqli_fetch_assoc($data2);
+        if ( is_null($row['vardas']) && is_null($row2['vardas'])   ) {
+          //  var_dump($row['vardas']);
+           // var_dump($row2['vardas']);
+          //  die;
 
-        echo DB::insert('insert into vartotojas(vardas, pavarde, gimimo_data, prisijungimo_vardas, slaptazodis, mob_numeris, el_pastas, miestas, 
-lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_data, $prisijungimo_vardas, $slaptazodis, $mob_numeris, $el_pastas, $miestas, null, null]);
+            echo DB::insert('insert into vartotojas(vardas, pavarde, gimimo_data, prisijungimo_vardas, slaptazodis, mob_numeris, el_pastas, miestas, 
+lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_data, $prisijungimo_vardas, $slaptazodis, $mob_numeris, $el_pastas, $miestas, null, null]);
 
-        return redirect('/login');
+            return redirect('/login');
+        }
+        else{
+            echo "Jau yra toks slaptažodis arba vartotojo vardas";
+        }
 
     }
 
@@ -58,29 +76,50 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             die ("Negaliu prisijungti prie MySQL:"	.mysqli_error($dbc));
         }
         $sql="select * from vartotojas where prisijungimo_vardas='$prisijungimo_vardas' and slaptazodis='$slaptazodis'";
+        $sql2="select * from darbuotojas where prisijungimo_vardas='$prisijungimo_vardas' and slaptazodis='$slaptazodis'";
         $data = mysqli_query($dbc, $sql);
+        $data2 = mysqli_query($dbc, $sql2);
         $row = mysqli_fetch_assoc($data);
+        $row2 = mysqli_fetch_assoc($data2);
 
-        if(is_null($row['vardas']))
+
+        if(is_null($row['vardas'])&&is_null($row2['vardas']))
         {
-            echo "klaida";
+            echo "tokio vartotojo nera";
 
         }
-        else{
+        elseif(is_null($row2['vardas'])){
+
             $_SESSION["username"] = $prisijungimo_vardas;
             $_SESSION["password"] = $slaptazodis;
 
-
+            $_SESSION["person"] = 4;
             $_SESSION["name"] = $row['vardas'];
             $_SESSION["surname"] = $row['pavarde'];
             $_SESSION["phone"] = $row['mob_numeris'];
             $_SESSION["el"] = $row['el_pastas'];
             $_SESSION["city"]= $row['miestas'];
+            $_SESSION["id"]= $row['id_Vartotojas'];
             //$_SESSION["data"] = $row['gimimo_data'];
             //$_SESSION["sex"] = $row['lytis'];
             return redirect('/catalog');
 
+        }else
+        {
+            $_SESSION["username"] = $prisijungimo_vardas;
+            $_SESSION["password"] = $slaptazodis;
+
+            $_SESSION["person"] = 5;
+            $_SESSION["name"] = $row['vardas'];
+            $_SESSION["surname"] = $row['pavarde'];
+            $_SESSION["phone"] = $row['mob_numeris'];
+            $_SESSION["el"] = $row['el_pastas'];
+            $_SESSION["id"]= $row['id_Darbuotojas'];
+           // var_dump( $_SESSION["person"]);
+            //die;
+            return redirect('/catalog');
         }
+
 
     }
 
@@ -157,7 +196,7 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
         $_SESSION["city"] = NULL;
         $_SESSION["password"]=NULL;
         $_SESSION["username"]=NULL;
-
+        $_SESSION["id"]= NULL;
         return redirect('/welcome');
     }
 
@@ -191,13 +230,36 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)',[$vardas, $pavarde, $gimimo_da
             $_SESSION["city"] = NULL;
             $_SESSION["password"]=NULL;
             $_SESSION["username"]=NULL;
-
+            $_SESSION["id"]= NULL;
             return redirect('/welcome');
         }
         return redirect('/catalog');
-
     }
 
+
+    public function tagslist(request $request)
+    {
+
+        $bookid = $_GET['bookid'];
+        $clientid = $_SESSION["id"];
+        $today = date("Y-m-d");
+
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $sql2="select * from zyma where fk_Knygaid_Knyga='$bookid' and fk_Vartotojasid_Vartotojas='$clientid'";
+        $data=mysqli_query($dbc, $sql2);
+        $row = mysqli_fetch_assoc($data);
+        $sql = "INSERT INTO zyma(pridejimo_data,fk_Vartotojasid_Vartotojas,fk_Knygaid_Knyga) VALUES('$today','$clientid','$bookid')";
+        if ( is_null($row['fk_Knygaid_Knyga']))
+        {
+            mysqli_query($dbc, $sql);
+            return redirect('/catalog');
+        }
+        else echo "jau yra";
+
+    }
 
 
 }

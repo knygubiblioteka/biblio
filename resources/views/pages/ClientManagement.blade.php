@@ -1,4 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <title>Biblioteka</title>
@@ -99,24 +103,32 @@
 <center>
     <a href=../public/editClient><input type=button value='Keisti duomenis'></a>
     <br><br>
-    <a href=../public/customerReports><input type=button value='Kliento ataskaitos'></a>
+
+
+    <!-- Trigger/Open The Modal -->
+    <?php
+    if (  $_SESSION["person"] ==4  )
+        echo"
+      <a href=../public/customerReports><input type=button value='Kliento ataskaitos'></a>
     <br><br>
     <a href=../public/customerBasket><input type=button value='Knygų krepšelis'></a>
     <br><br>
-
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Šalinti paskyrą</button>
+    <a href=../public/alltagslist><input type=button value='Žymos'></a>
+    <br><br>
+  <button id='myBtn'>Šalinti paskyrą</button>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id='myModal' class='modal'>
 
         <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <div class='modal-content'>
+            <span class='close'>&times;</span>
             <p>Ar tikrai norite pašalintin paskyrą?</p>
-            <a href=../public/deleteclient><input id="Btn2" type="submit" value="Patvirtinti"></a>
+            <a href=../public/deleteclient><input id='Btn2' type='submit' value='Patvirtinti'></a>
         </div>
-    </div>
+    </div> ";
+    ?>
+
     <script>
         // Get the modal
         var modal = document.getElementById('myModal');
