@@ -100,6 +100,7 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
             $_SESSION["el"] = $row['el_pastas'];
             $_SESSION["city"]= $row['miestas'];
             $_SESSION["id"]= $row['id_Vartotojas'];
+            $_SESSION["reports"]= NULL;
             //$_SESSION["data"] = $row['gimimo_data'];
             //$_SESSION["sex"] = $row['lytis'];
             return redirect('/catalog');
@@ -115,6 +116,7 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
             $_SESSION["phone"] = $row['mob_numeris'];
             $_SESSION["el"] = $row['el_pastas'];
             $_SESSION["id"]= $row['id_Darbuotojas'];
+            $_SESSION["reports"]= NULL;
            // var_dump( $_SESSION["person"]);
             //die;
             return redirect('/catalog');
@@ -197,6 +199,7 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         $_SESSION["password"]=NULL;
         $_SESSION["username"]=NULL;
         $_SESSION["id"]= NULL;
+        $_SESSION["reports"]= NULL;
         return redirect('/welcome');
     }
 
@@ -231,6 +234,7 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
             $_SESSION["password"]=NULL;
             $_SESSION["username"]=NULL;
             $_SESSION["id"]= NULL;
+            $_SESSION["reports"]= NULL;
             return redirect('/welcome');
         }
         return redirect('/catalog');
@@ -261,5 +265,31 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
 
     }
 
+
+    public function reports(request $request)
+    {
+
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $from = $request->input('datafrom');
+        $to = $request->input('datato');
+
+        $str_start_date = date("Y-m-d H:i:s",strtotime("$from 00:00:00"));
+        $str_end_date = date("Y-m-d H:i:s",strtotime("$to 23:59:59"));
+        $user=$_SESSION['id'];
+
+        $sql="select uzsakymas.id_Uzsakymas as id_Uzsakymas, knyga.pavadinimas as pavadinimas, uzsakymas.	uzsakymo_data as datanuo, uzsakymas.tikroji_grazinimo_data as dataiki from uzsakymas,knyga where uzsakymas.id_Uzsakymas=knyga.fk_Uzsakymasid_Uzsakymas and uzsakymas.fk_Vartotojasid_Vartotojas='$user' and uzsakymas.uzsakymo_data>= '$str_start_date' and uzsakymas.uzsakymo_data<='$str_end_date' ";
+        $result = mysqli_query($dbc, $sql);
+        while($row = mysqli_fetch_assoc($result))
+        {
+            var_dump($row['pavadinimas']);
+        }
+
+        $_SESSION["reports"]= $sql;
+
+        return redirect('/customerReports');
+    }
 
 }
