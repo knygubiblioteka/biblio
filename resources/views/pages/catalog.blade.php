@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_POST['delete']))
 {
     $id = $_POST['id_Knyga'];
@@ -148,14 +148,21 @@ function filterTable($query)
     <div style='text-align:center'>
 
         <h2>Knygų katalogas</h2>
-
-    </div>
-    <div style="text-align: right" >
-        <td class="{{Request::is('/book')?'active':null }}"><a href="{{url('/book')}}">Pridėti naują knygą</a></td>
+    <?php
+    if (  $_SESSION["person"] ==5  )
+        {
+            echo" </div>
+    <div style='text-align: right' >
+        <td class={{Request::is('/book')?'active':null }}><a href={{url('/book')}}>Pridėti naują knygą</a></td>
         <br>
-        <input type="text" name="id_Knyga" placeholder="Įveskite knygos ID">
-        <td> <input type='submit' name='delete' value="Šalinti knygą" onclick="confirm('Ar tikrai norite pašalinti knygą?')"></td>
-    </div>
+        <input type='text' name='id_Knyga' placeholder='Įveskite knygos ID'>
+        <td> <input type='submit' name='delete' value='Šalinti knygą' onclick='confirm('Ar tikrai norite pašalinti knygą?')'></td>
+    </div> ";
+
+        }
+
+        ?>
+
 
 
     <input type="text" name="valueToSearch" placeholder="Ieškoti...">
@@ -210,12 +217,17 @@ function filterTable($query)
 
 
                 <?php while($row = mysqli_fetch_array($search_result)) :?>
-                <tr>
-                    <td><?php echo $row['id_Knyga'];?></td>
+
+                    <?php $array =array() ?>
+                    <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
                     <td><?php echo $row['pavadinimas'];?></td>
                     <td><?php echo $row['autorius'];?></td>
                     <td><?php echo $row['zanras'];?></td>
                     <td><?php echo $row['isleidimo_data'];?></td>
+                    <td><?php echo" <a href=../public/tagslist?bookid=",urlencode($idd),"><input type=button id='$idd' value='Žymos' ></a> " ?></td>
+
+
+
                     <td> <a href=>Peržiūrėti</a></td>
 
                 </tr>
@@ -228,6 +240,8 @@ function filterTable($query)
     </div>
     </div>
 </form>
+
+
 
 </body>
 </html>

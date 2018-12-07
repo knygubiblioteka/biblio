@@ -59,6 +59,12 @@ Route::get('/bookInfo', function () {
 Route::get('/ClientManagement', function () {
     return view('pages.ClientManagement');
 });
+Route::get('/tagslist', 'UserController@tagslist');
+
+Route::get('/alltagslist', function () {
+    return view('pages.tagslist');
+});
+
 Route::get('/editClient', function () {
     return view('pages.editClient');
 });
