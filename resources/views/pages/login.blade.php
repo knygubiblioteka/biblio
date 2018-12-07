@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +25,12 @@
             font-weight: bold;
             font-size: 15px;
         }
-
+        h4 {
+            color: #ff0000;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+        }
         button
         {
             background-color: #A1B0AB;
@@ -61,6 +70,17 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <br><br>
         <button type=submit name="button">Prisijungti</button>
+        <?php
+        if(!empty($_SESSION['error']))
+        {
+
+
+            if (   $_SESSION['error']=='klaida'  )
+            {
+                echo "<h4>Neteisingai įvestas prisijungimo vardas arba slaptažodis</h4>";
+                $_SESSION['error'] = "";
+            }}
+        ?>
     </form>
 </div>
 </div>

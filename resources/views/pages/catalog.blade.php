@@ -123,6 +123,12 @@ function filterTable($query)
         font-size: 15px;
 
     }
+    h4 {
+        color: #ff0000;
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+    }
 
 </style>
 <body>
@@ -234,6 +240,17 @@ function filterTable($query)
 
                 <?php endwhile;?>
                 </tbody>
+                <?php
+                if(!empty($_SESSION['error']))
+                {
+
+
+                    if (   $_SESSION['error']=='klaida'  )
+                    {
+                        echo "<h4>Ši žyma jau egzistuoja</h4>";
+                        $_SESSION['error'] = "";
+                    }}
+                ?>
             </table>
 
         </div>

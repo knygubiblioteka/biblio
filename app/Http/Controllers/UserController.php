@@ -85,8 +85,8 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
 
         if(is_null($row['vardas'])&&is_null($row2['vardas']))
         {
-            echo "tokio vartotojo nera";
-
+            $_SESSION["error"]="klaida";
+            return redirect('/login');
         }
         elseif(is_null($row2['vardas'])){
 
@@ -261,7 +261,11 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
             mysqli_query($dbc, $sql);
             return redirect('/catalog');
         }
-        else echo "jau yra";
+        else
+        {
+            $_SESSION["error"]="klaida";
+            return redirect('/catalog');
+        }
 
     }
 
