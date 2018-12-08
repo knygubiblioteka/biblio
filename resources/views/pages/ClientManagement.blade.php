@@ -22,7 +22,6 @@ session_start();
         <ul class="nav navbar-nav">
             <li><a href="catalog">Katalogas</a></li>
             <li><a href="ClientManagement">Paskyros valdymas</a></li>
-            <li><a href="#">Page 2</a></li>
             <li><a href="reports">Ataskaitos</a></li>
             <li><a href="reports">Padaliniu valdymas</a></li>
 

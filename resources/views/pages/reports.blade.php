@@ -1,3 +1,59 @@
+<?php
+session_start();
+$user=$_SESSION['id'];
+$dbc = mysqli_connect("localhost", "root", "", "biblioteka");
+
+if(isset($_GET['submit']))
+{
+    $value = $_GET['tipas'];
+    $from = $_GET['from'];
+    $to = $_GET['to'];
+    $str_start_date = date("Y-m-d H:i:s",strtotime("$from 00:00:00"));
+    $str_end_date = date("Y-m-d H:i:s",strtotime("$to 23:59:59"));
+
+    if($value==1)
+    {
+        $sql="SELECT * FROM knyga";
+        echo "<h2>pasirinkta 1. Nebaigta</h2>";
+        $result = mysqli_query($dbc, $sql);
+    }
+    if($value==2)
+    {
+        $sql="SELECT * FROM knyga";
+        echo "<h2>pasirinkta 2. Nebaigta</h2>";
+        $result = mysqli_query($dbc, $sql);
+    }
+    if($value==3)
+    {
+        $sql="SELECT * FROM knyga";
+        echo "<h2>pasirinkta 3. Nebaigta</h2>";
+        $result = mysqli_query($dbc, $sql);
+    }
+    if($value==4)
+    {
+        $sql="SELECT * FROM knyga";
+        echo "<h2>pasirinkta 4. nebaigta</h2>";
+        $result = mysqli_query($dbc, $sql);
+    }
+    if($value==5)
+    {
+        $sql="SELECT * FROM knyga";
+        echo "<h2>pasirinkta 5. nebaigta</h2>";
+        $result = mysqli_query($dbc, $sql);
+    }
+    if($value==6)
+    {
+        $sql="select * from knyga INNER JOIN uzsakymas on knyga.fk_Uzsakymasid_Uzsakymas=id_Uzsakymas WHERE tikroji_grazinimo_data >= '$str_start_date' AND tikroji_grazinimo_data <= '$str_end_date'";
+        $result = mysqli_query($dbc, $sql);
+    }
+}
+else{
+    $sql="SELECT * FROM knyga";
+$result = mysqli_query($dbc, $sql);
+}
+
+?>
+
 <head>
     <title>Biblioteka</title>
     <meta charset="utf-8">
@@ -14,7 +70,6 @@
         <ul class="nav navbar-nav">
             <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
-            <li><a href="#">Page 2</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
             <li class="{{Request::is('/UnitManagement')?'active':null }}"><a href="{{url('/UnitManagement')}}">Padaliniu valdymas</a></li>
         </ul>
@@ -45,7 +100,19 @@
         color: black;
         font-weight: bold;
         font-size: 15px;
-        width: 250px;
+        width: 300px;
+        border-radius: 12px;
+        height: 25px;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    select[name="zanras_knygos"]
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 150px;
         border-radius: 12px;
         height: 25px;
         font-family: 'Nunito', sans-serif;
@@ -72,7 +139,7 @@
         color: black;
         font-weight: bold;
         font-size: 15px;
-        width: 150px;
+        width: 180px;
         border-radius: 12px;
         font-family: 'Nunito', sans-serif;
     }
@@ -92,38 +159,58 @@
 
     <html>
     <body>
-    <div class="container">
-            <div class="col-xs-12 col-md-8">
-                <form action ="{{URL::to('/showtable')}}" method = "get">
+
+                <form method = "get">
                 <div class="dropdown2">Pasirinkite ataskaitos tipą
                     <br>
                     <br>
                     <select name="tipas">
                         <option value="1">Populiariausios knygos</option>
                         <option value="2">Geriausiai įvertintos knygos</option>
-                        <option value="3">Vartotojo žymos</option>
+                        <option value="3">Vartotojų žymos</option>
                         <option value="4">Padalinių populiarumas</option>
                         <option value="5">Populiariausios knygos pagal žanrą</option>
                         <option value="6">Populiariausios knygos pagal metus</option>
                     </select>
-                    <input name = "submit" type="submit" value="Rodyti">   <input type="date" name="from"/><input type="date" name="to"/>
+                    <select name="zanras_knygos">
+                        <option value="1">Fantastika</option>
+                        <option value="2">Romanas</option>
+                        <option value="3">Novelė</option>
+                        <option value="4">Mokslinė</option>
+                        <option value="5">Biografija</option>
+                        <option value="6">Drama</option>
+                        <option value="7">Enciklopedija</option>
+                        <option value="8">Detektyvas</option>
+                    </select>
+                    <input type="date" name="from"/><input type="date" name="to"/><input name = "submit" type="submit" value="Rodyti">
 
                 </div>
                 <br>
-                    <table style="width:100%">
+                    <div class="container">
+                        <div class="col-xs-12 col-md-8">
 
+                    <table class="table table-hover">
+                        <thead>
                         <tr>
                             <th>Nr.</th>
                             <th>Pavadinimas</th>
                             <th>Autorius</th>
                             <th>Metai</th>
                         </tr>
-                            <tr>
-                                <td>{{$Knygos->id_Knyga}}</td>
-                                <td>{{$Knygos->pavadinimas}}</td>
-                                <td>{{$Knygos->autorius}}</td>
-                                <td>{{$Knygos->isleidimo_data}}</td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php while($row = mysqli_fetch_array($result)) :?>
+
+                        <?php $array =array() ?>
+                        <td><?php echo $row['id_Knyga'];?></td>
+                        <td><?php echo $row['pavadinimas'];?></td>
+                        <td><?php echo $row['autorius'];?></td>
+                        <td><?php echo $row['isleidimo_data'];?></td>
+
+                        </tr>
+
+                        <?php endwhile;?>
+                        </tbody>
                     </table>
                 </form>
         </div>
