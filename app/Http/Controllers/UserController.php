@@ -83,8 +83,15 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         $row2 = mysqli_fetch_assoc($data2);
 
 
+
         if(is_null($row['vardas'])&&is_null($row2['vardas']))
         {
+            var_dump($row['vardas']);
+            var_dump($row2['vardas']);
+            die;
+            var_dump("nieko nera");
+            die;
+
             $_SESSION["error"]="klaida";
             return redirect('/login');
         }

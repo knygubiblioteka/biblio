@@ -1,51 +1,7 @@
+
 <?php
 session_start();
-if(isset($_POST['delete']))
-{
-    $id = $_POST['id_Knyga'];
-    //    echo $id;
-    // search in all table columns
-    // using concat mysql function
-    $query = "DELETE FROM knyga WHERE `id_Knyga`=$id";
-    // $query = "SELECT * FROM knyga";
-    $search_result = filterTable($query);
 
-}
-
-if(isset($_POST['search']))
-{
-    $valueToSearch = $_POST['valueToSearch'];
-    // search in all table columns
-    // using concat mysql function
-    $query = "SELECT * FROM knyga WHERE CONCAT(`pavadinimas`, `autorius`) LIKE '%".$valueToSearch."%'";
-    $search_result = filterTable($query);
-
-}
-
-else if(isset($_POST['filtruoti']))
-{
-    $valueToSearch = $_POST['filtr'];
-    // search in all table columns
-    // using concat mysql function
-    if($valueToSearch==0)
-        $query = "SELECT * FROM knyga";
-    else
-        $query = "SELECT * FROM knyga WHERE `zanras`=$valueToSearch";
-    $search_result = filterTable($query);
-
-}
-
-else {
-    $query = "SELECT * FROM knyga";
-    $search_result = filterTable($query);
-}
-// function to connect and execute the query
-function filterTable($query)
-{
-    $connect = mysqli_connect("localhost", "root", "", "biblioteka");
-    $filter_Result = mysqli_query($connect, $query);
-    return $filter_Result;
-}
 
 ?>
 
@@ -87,13 +43,23 @@ function filterTable($query)
         font-family: 'Nunito', sans-serif;
     }
 
-    input[value="Rodyti"]
+    input[type="submit"]
     {
         background-color: #A1B0AB;
         color: black;
         font-weight: bold;
         font-size: 15px;
-        width: 100px;
+        width: 125px;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+    input[type="button"]
+    {
+        background-color: #A1B0AB;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 80px;
         border-radius: 12px;
         font-family: 'Nunito', sans-serif;
     }
@@ -113,7 +79,7 @@ function filterTable($query)
         font-family: 'Nunito', sans-serif;
     }
     table{
-        position: absolute;
+        position: center;
         right: 145px;
     }
     h3{
@@ -133,7 +99,6 @@ function filterTable($query)
 </style>
 <body>
 
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -149,43 +114,46 @@ function filterTable($query)
         </ul>
     </div>
 </nav>
-<form action="/projektas/public/catalog" method="post">
-    <div style='text-align:center'>
-
-        <h2>Knygų katalogas</h2>
-    <?php
-    if (  $_SESSION["person"] ==5  )
+<div style='text-align:center'>
+<h2 style=>Knygų katalogas</h2>
+</div>
+<div class="container">
+    <div class="col-xs-12 col-md-8">
+<form class="" action="{{URL::to('/deleteBook')}}" method="post">
+    @csrf
+    <?php if($_SESSION["person"]==5)
         {
-            echo" </div>
-    <div style='text-align: right' >
-        <td class={{Request::is('/book')?'active':null }}><a href={{url('/book')}}>Pridėti naują knygą</a></td>
-        <br>
-        <input type='text' name='id_Knyga' placeholder='Įveskite knygos ID'>
-        <td> <input type='submit' name='delete' value='Šalinti knygą' onclick='confirm('Ar tikrai norite pašalinti knygą?')'></td>
-    </div> ";
+    echo"
+    <input type='text' name='id' placeholder='Įveskite knygos ID'>
+    <input type='submit' name='button' value='Šalinti knygą' onclick=\"return confirm('Ar tikrai norite ištrinti knygą?')\"></input>
+   ";} ?>
+</form>
+<?php if($_SESSION["person"]==5)
+        {
+            echo "
+<td class=\"{{Request::is('/book')?'active':null }}\"><a href='/projektas/public/book'>Pridėti naują knygą</a></td>
+    "; } ?>
+    </div>
+    </div>
 
-        }
 
-        ?>
+<form action="{{URL::to('/filter')}}"  method="post" >
+    @csrf
 
-
-
-    <input type="text" name="valueToSearch" placeholder="Ieškoti...">
-    <input type="submit" name="search" value="Rodyti"><br><br>
-
-    <br>
-    <br>
+<br>
     <!-- DROP DOWN-->
     <div class="container">
 
         <div class="col-xs-12 col-md-8">
-            <br>
-            <br>
+            <div class="dropdown2"> Atlikite paiešką:</div>
+            <input type="text" placeholder="Ieškoti.." id="myInput" onkeyup="filterFunction()">
+            <br> <br>
+
             <!-- DROP DOWN-->
             <div class="dropdown2">Pasirinkite knygų žanrą:
+
                 <br>
-                <br>
-                <select name="filtr" class="dropdown2">
+                <select name="filtruoti" class="dropdown2">
                     <option value="0"></option>
                     <option value="1">Fantastika</option>
                     <option value="2">Romanas</option>
@@ -196,49 +164,87 @@ function filterTable($query)
                     <option value="7">Enciklopedija</option>
                     <option value="8">Detektyvas</option>
                 </select>
+                <input type="submit" name="filtruot" value="Rodyti" placeholder="Rod">
+                <br><br>
             </div>
-
-            <br>
-            <input type="submit" name="filtruoti" value="Rodyti"><br><br>
-            <br>
             <br>
 
-            <br>
-            <br>
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+            <script>
+                /* When the user clicks on the button,
+                toggle between hiding and showing the dropdown content */
+                function yourFunction() {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                }
 
 
-            <table class="table table-hover" >
-                <thead>
-                <tr>
+                function filterFunction() {
+                    var input, filter, ul, li, a, i;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    div = document.getElementById("myTable");
+                    a = div.getElementsByTagName("tr");
+                    for (i = 0; i < a.length; i++) {
+                        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            a[i].style.display = "";
+                        } else {
+                            a[i].style.display = "none";
+                        }
+                    }
+                }
+            </script>
+
+            <table class="table table-hover" id="notmyTable">
+
+                <tr class="header">
                     <th>ID</th>
                     <th>Pavadinimas</th>
                     <th>Autorius</th>
                     <th>Žanras</th>
                     <th>Metai</th>
                 </tr>
-                </thead>
-                <tbody>
 
+            </table>
 
+                <table class="table table-hover" id="myTable">
 
-                <?php while($row = mysqli_fetch_array($search_result)) :?>
-
-                    <?php $array =array() ?>
+<?php
+    $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras";
+        $connect = mysqli_connect("localhost", "root", "", "biblioteka");
+        $search_result = mysqli_query($connect, $query);
+                 while($row = mysqli_fetch_array($search_result)) :?>
+                <tr>
                     <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
-                    <td><?php echo $row['pavadinimas'];?></td>
+                    <td><?php echo $row['pavadinimas']; $pav = $row['pavadinimas'];?></td>
                     <td><?php echo $row['autorius'];?></td>
-                    <td><?php echo $row['zanras'];?></td>
+                    <td><?php echo $row['name'];?></td>
                     <td><?php echo $row['isleidimo_data'];?></td>
                     <td><?php echo" <a href=../public/tagslist?bookid=",urlencode($idd),"><input type=button id='$idd' value='Žymos' ></a> " ?></td>
 
-
-
-                    <td> <a href=>Peržiūrėti</a></td>
-
+                <td><?php echo" <a href=../public/bookInfo?bookid=",urlencode($idd),"><input type=button id='$idd' value='Peržiūrėti' ></a> " ?></td>
                 </tr>
 
                 <?php endwhile;?>
-                </tbody>
+
                 <?php
                 if(!empty($_SESSION['error']))
                 {

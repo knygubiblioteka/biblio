@@ -27,6 +27,14 @@ Route::get('/registration', function () {
 });
 Route::post('/store', 'UserController@store');
 
+Route::post('/addBook', 'BookControler@addBook');
+
+Route::post('/addRecomendation', 'BookControler@addRecomendation');
+
+Route::post('/deleteBook', 'BookControler@deleteBook');
+
+Route::post('/filter', 'BookControler@filter');
+
 Route::get('/login', function () {
     return view('pages.login');
 });
@@ -49,6 +57,7 @@ Route::get('/showtable', 'ReportsController@showtable');
 
 Route::get('/catalog', function () {
     return view('pages.catalog');
+
 });
 Route::get('/book', function () {
     return view('pages.book');
