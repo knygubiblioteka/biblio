@@ -88,7 +88,6 @@ session_start();
         <ul class="nav navbar-nav">
             <li><a href="catalog">Katalogas</a></li>
             <li><a href="ClientManagement">Paskyros valdymas</a></li>
-            <li><a href="#">Page 2</a></li>
             <li><a href="reports">Ataskaitos</a></li>
             <li><a href="reports">Padaliniu valdymas</a></li>
 
@@ -102,8 +101,9 @@ session_start();
 
 <body>
 <html>
-
-<h3>Žymos</h3>
+<div class="container">
+    <h3>Žymos</h3>
+    <div class="col-xs-12 col-md-8">
 <br><br>
 <?php
     $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
@@ -145,7 +145,10 @@ if (!$dbc) {
     <?php endwhile;?>
     </tbody>
 </table>
-
+    </div>
+</div>
+</html>
+</body>
 
 
 

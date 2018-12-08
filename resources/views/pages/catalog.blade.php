@@ -142,7 +142,6 @@ function filterTable($query)
         <ul class="nav navbar-nav">
             <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
-            <li><a href="#">Page 2</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
