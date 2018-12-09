@@ -10,7 +10,6 @@ if(isset($_GET['submit']))
     $to = $_GET['to'];
     $str_start_date = date("Y-m-d H:i:s",strtotime("$from 00:00:00"));
     $str_end_date = date("Y-m-d H:i:s",strtotime("$to 23:59:59"));
-    $zanr = $_GET['zanras_knygos'];
 
     if($value==1)//knygos kurios yra itrauktos i uzsakymus
     {
