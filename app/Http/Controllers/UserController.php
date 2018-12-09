@@ -86,11 +86,8 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
 
         if(is_null($row['vardas'])&&is_null($row2['vardas']))
         {
-            var_dump($row['vardas']);
-            var_dump($row2['vardas']);
-            die;
-            var_dump("nieko nera");
-            die;
+
+
 
             $_SESSION["error"]="klaida";
             return redirect('/login');
@@ -252,12 +249,13 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
     {
         $usernm = $_SESSION["username"];
         $passwd = $_SESSION["password"];
-
+        $idd =   $_SESSION["id"];
         $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
         if (!$dbc) {
             die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
         }
-        $sql = "DELETE vartotojas from vartotojas where prisijungimo_vardas='$usernm' and slaptazodis='$passwd'";
+        $sql = "DELETE vartotojas from vartotojas where id_Vartotojas='$idd'";
+
         if (mysqli_query($dbc, $sql)) {
             $_SESSION["name"] = NULL;
             $_SESSION["surname"] = NULL;

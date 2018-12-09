@@ -68,7 +68,7 @@ session_start();
             position: absolute;
             right: 145px;
         }
-        h3{
+        .h3{
             position: absolute;
             right: 300px;
             top:80px;

@@ -68,7 +68,7 @@ session_start();
             position: absolute;
             right: 145px;
         }
-        h3{
+        .h3{
             position: absolute;
             right: 300px;
             top:80px;
@@ -110,8 +110,9 @@ session_start();
 <body>
 <html>
 <div class="container">
-    <h3>Žymos</h3>
+
     <div class="col-xs-12 col-md-8">
+        <h3>Žymos</h3>
 <br><br>
 <?php
     $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
