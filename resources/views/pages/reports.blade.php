@@ -10,29 +10,35 @@ if(isset($_GET['submit']))
     $to = $_GET['to'];
     $str_start_date = date("Y-m-d H:i:s",strtotime("$from 00:00:00"));
     $str_end_date = date("Y-m-d H:i:s",strtotime("$to 23:59:59"));
+    $zanr = $_GET['zanras_knygos'];
 
-    if($value==1)
+    if($value==1)//knygos kurios yra itrauktos i uzsakymus
     {
-        $sql="SELECT * FROM knyga";
-        echo "<h2>pasirinkta 1. Nebaigta</h2>";
+        $sql="SELECT * FROM knyga
+              WHERE fk_Uzsakymasid_Uzsakymas IS NOT NULL";
         $result = mysqli_query($dbc, $sql);
     }
-    if($value==2)
+    if($value==2) //knygos kurios yra ivertintos 5 balais
     {
-        $sql="SELECT * FROM knyga";
-        echo "<h2>pasirinkta 2. Nebaigta</h2>";
+        $sql="SELECT * FROM rekomendacija INNER JOIN knyga on rekomendacija.fk_Knygaid_Knyga=knyga.id_Knyga WHERE rekomendacija.vertinimas='5'";
         $result = mysqli_query($dbc, $sql);
     }
-    if($value==3)
+    if($value==3)   //knygos kurios itrauktos i zymas
     {
-        $sql="SELECT * FROM knyga";
-        echo "<h2>pasirinkta 3. Nebaigta</h2>";
+        $sql="SELECT DISTINCT id_Knyga, pavadinimas, autorius, isleidimo_data
+              FROM knyga INNER JOIN zyma on zyma.fk_Knygaid_Knyga=knyga.id_Knyga";
         $result = mysqli_query($dbc, $sql);
     }
-    if($value==4)
+    if($value==4) //knygos is populiariausiu padaliniu
     {
-        $sql="SELECT * FROM knyga";
-        echo "<h2>pasirinkta 4. nebaigta</h2>";
+           $pad="SELECT fk_Padalinysid_Padalinys,
+                COUNT(fk_Padalinysid_Padalinys)
+                FROM uzsakymas
+                  WHERE uzsakymo_busena='2'";
+        $resultpad = mysqli_query($dbc, $pad);
+        $rowpad = mysqli_fetch_array($resultpad);
+        $nr = $rowpad['fk_Padalinysid_Padalinys'];
+        $sql="select * from knyga INNER JOIN uzsakymas on knyga.fk_Uzsakymasid_Uzsakymas=id_Uzsakymas WHERE fk_Padalinysid_Padalinys = '$nr'";
         $result = mysqli_query($dbc, $sql);
     }
     if($value==5)
@@ -41,7 +47,7 @@ if(isset($_GET['submit']))
         echo "<h2>pasirinkta 5. nebaigta</h2>";
         $result = mysqli_query($dbc, $sql);
     }
-    if($value==6)
+    if($value==6) //knygos kuriu uzsakymai uzbaigti pasirinktu laikotarpiu
     {
         $sql="select * from knyga INNER JOIN uzsakymas on knyga.fk_Uzsakymasid_Uzsakymas=id_Uzsakymas WHERE tikroji_grazinimo_data >= '$str_start_date' AND tikroji_grazinimo_data <= '$str_end_date'";
         $result = mysqli_query($dbc, $sql);
@@ -171,16 +177,6 @@ $result = mysqli_query($dbc, $sql);
                         <option value="4">Padalinių populiarumas</option>
                         <option value="5">Populiariausios knygos pagal žanrą</option>
                         <option value="6">Populiariausios knygos pagal metus</option>
-                    </select>
-                    <select name="zanras_knygos">
-                        <option value="1">Fantastika</option>
-                        <option value="2">Romanas</option>
-                        <option value="3">Novelė</option>
-                        <option value="4">Mokslinė</option>
-                        <option value="5">Biografija</option>
-                        <option value="6">Drama</option>
-                        <option value="7">Enciklopedija</option>
-                        <option value="8">Detektyvas</option>
                     </select>
                     <input type="date" name="from"/><input type="date" name="to"/><input name = "submit" type="submit" value="Rodyti">
 
