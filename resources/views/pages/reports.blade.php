@@ -42,7 +42,20 @@ if(isset($_GET['submit']))
     }
     if($value==5)
     {
-        $sql="SELECT * FROM knyga";
+        $zanr="SELECT *, COUNT(zanras) as maxzanras
+            FROM knyga
+               GROUP BY zanras
+               ORDER BY maxzanras DESC";
+        $result1 = mysqli_query($dbc, $zanr);
+        $k = 0;
+        while($row = mysqli_fetch_array($result1))
+            {
+                $id = $row['zanras'];
+                $k= 1;
+                break;
+            }
+
+        $sql="select * from knyga WHERE zanras = '$id'";
         echo "<h2>pasirinkta 5. nebaigta</h2>";
         $result = mysqli_query($dbc, $sql);
     }
