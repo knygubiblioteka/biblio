@@ -56,7 +56,6 @@ if(isset($_GET['submit']))
             }
 
         $sql="select * from knyga WHERE zanras = '$id'";
-        echo "<h2>pasirinkta 5. nebaigta</h2>";
         $result = mysqli_query($dbc, $sql);
     }
     if($value==6) //knygos kuriu uzsakymai uzbaigti pasirinktu laikotarpiu
@@ -215,8 +214,9 @@ $result = mysqli_query($dbc, $sql);
                         </tr>
                         </thead>
                         <tbody>
-                        <?php while($row = mysqli_fetch_array($result)) :?>
+                        <?php
 
+                         while($row = mysqli_fetch_array($result)) :?>
                         <?php $array =array() ?>
                         <td><?php echo $row['id_Knyga'];?></td>
                         <td><?php echo $row['pavadinimas'];?></td>
