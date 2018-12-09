@@ -8,40 +8,24 @@ class BookControler extends Controller
 {
     public function filter(request $request)
     {
-        print_r($request->input());
+       session_start();
         $zanras = ($request->input('filtruoti'));
         $ieskoti = ($request->input('valueToSearch'));
 
         if (!is_null($ieskoti)) {
-            //  $valueToSearch = $_POST['valueToSearch'];
-            // search in all table columns
-            // using concat mysql function
-            $query = "SELECT * FROM knyga WHERE CONCAT(`pavadinimas`, `autorius`) LIKE '%" . $ieskoti . "%'";
-            // $search_result = filterTable($query);
-           // return $query;
+            $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras and  CONCAT(`pavadinimas`, `autorius`) LIKE '%" . $ieskoti . "%'";
 
         } else if (!is_null($zanras)) {
-            //  $valueToSearch = $_POST['filtr'];
-            // search in all table columns
-            // using concat mysql function
             if ($zanras == 0)
-                $query = "SELECT * FROM knyga";
+                $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras";
             else
-                $query = "SELECT * FROM knyga WHERE `zanras`=$zanras";
-            //  $connect = mysqli_connect("localhost", "root", "", "biblioteka");
-            //   $search_result = mysqli_query($connect, $query);
-            $search_result = $query;
-          //  return $search_result;
-            //  return redirect('/catalog');
+                $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras and `zanras`=$zanras";
+
         } else {
             $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras";
-            //$search_result = filterTable($query);
-            //   setcookie($search_result,$query);
-          //  return $query;
         }
-// function to connect and execute the query
+        $_SESSION["rez"] = $query;
         return redirect('/catalog');
-       // setcookie("$GLOBALS")
     }
 
 

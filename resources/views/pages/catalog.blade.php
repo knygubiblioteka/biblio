@@ -1,10 +1,7 @@
 
 <?php
 session_start();
-
-
 ?>
-
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,24 +133,22 @@ session_start();
     </div>
     </div>
 
-
-<form action="{{URL::to('/filter')}}"  method="post" >
+<form action="{{URL::to('/filter')}}"  method="post" id="demo" >
     @csrf
-
 <br>
     <!-- DROP DOWN-->
     <div class="container">
 
         <div class="col-xs-12 col-md-8">
             <div class="dropdown2"> Atlikite paiešką:</div>
-            <input type="text" placeholder="Ieškoti.." id="myInput" onkeyup="filterFunction()">
-            <br> <br>
 
+            <input type="text" placeholder="Ieškoti..." name="valueToSearch">
+            <input type="submit" name="ieskot" value="Rodyti" placeholder="rod">
+            <br> <br>
             <!-- DROP DOWN-->
             <div class="dropdown2">Pasirinkite knygų žanrą:
-
                 <br>
-                <select name="filtruoti" class="dropdown2">
+                <select name="filtruoti" class="dropdown2" id="zan">
                     <option value="0"></option>
                     <option value="1">Fantastika</option>
                     <option value="2">Romanas</option>
@@ -168,53 +163,8 @@ session_start();
                 <br><br>
             </div>
             <br>
-
-            <script>
-                function myFunction() {
-                    var input, filter, table, tr, td, i, txtValue;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("myTable");
-                    tr = table.getElementsByTagName("tr");
-                    for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[0];
-                        if (td) {
-                            txtValue = td.textContent || td.innerText;
-                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
-                }
-            </script>
-            <script>
-                /* When the user clicks on the button,
-                toggle between hiding and showing the dropdown content */
-                function yourFunction() {
-                    document.getElementById("myDropdown").classList.toggle("show");
-                }
-
-
-                function filterFunction() {
-                    var input, filter, ul, li, a, i;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
-                    div = document.getElementById("myTable");
-                    a = div.getElementsByTagName("tr");
-                    for (i = 0; i < a.length; i++) {
-                        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            a[i].style.display = "";
-                        } else {
-                            a[i].style.display = "none";
-                        }
-                    }
-                }
-            </script>
-
-            <table class="table table-hover" id="notmyTable">
-
+            <table class="table table-hover" id="myTable">
+            <thead>
                 <tr class="header">
                     <th>ID</th>
                     <th>Pavadinimas</th>
@@ -223,18 +173,19 @@ session_start();
                     <th>Metai</th>
                 </tr>
 
-            </table>
-
-                <table class="table table-hover" id="myTable">
-
-<?php
-    $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras";
-        $connect = mysqli_connect("localhost", "root", "", "biblioteka");
-        $search_result = mysqli_query($connect, $query);
+            </thead>
+                <tbody>
+        <?php
+            if(!empty($_SESSION["rez"])){
+                $query=$_SESSION["rez"];}
+            else{
+                $query = "SELECT * FROM knyga, zanras where zanras=id_Zanras";}
+            $connect = mysqli_connect("localhost", "root", "", "biblioteka");
+            $search_result = mysqli_query($connect, $query);
                  while($row = mysqli_fetch_array($search_result)) :?>
                 <tr>
                     <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
-                    <td><?php echo $row['pavadinimas']; $pav = $row['pavadinimas'];?></td>
+                    <td><?php echo $row['pavadinimas'];?></td>
                     <td><?php echo $row['autorius'];?></td>
                     <td><?php echo $row['name'];?></td>
                     <td><?php echo $row['isleidimo_data'];?></td>
@@ -248,24 +199,17 @@ session_start();
                 <?php
                 if(!empty($_SESSION['error']))
                 {
-
-
                     if (   $_SESSION['error']=='klaida'  )
                     {
                         echo "<h4>Ši žyma jau egzistuoja</h4>";
                         $_SESSION['error'] = "";
                     }}
                 ?>
+                </tbody>
             </table>
-
         </div>
     </div>
     </div>
 </form>
-
-
-
 </body>
 </html>
-
-
