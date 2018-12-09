@@ -1,3 +1,10 @@
+
+<?php
+session_start();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,50 +98,61 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
+            <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
+            <li class="{{Request::is('/basket')?'active':null}}"><a href="{{url('/basket')}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
             <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>       </ul>
     </div>
 </nav>
 
 <body>
 <html>
-
-    <h2>Krepšelis</h2>
-    <br><br>
+<div class="container">
+    <h3>Krepšelis</h3>
     <br><br>
     <input type="submit" value="Patvirtinti!">
     <br><br>
+    <div class="col-xs-12 col-md-8">
+        <br><br>
+        <?php
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $order=$_SESSION['order'];
+        $sql="select * from knyga where fk_Uzsakymasid_Uzsakymas='$order'";
+        $result = mysqli_query($dbc, $sql);
+        ?>
+        <table class="table table-hover" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pavadinimas</th>
+                <th>Autorius</th>
+                <th>Žanras</th>
+                <th>Metai</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    <div class="container">
-        <div class="col-xs-12 col-md-8">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <td>1</td>
-            <td>Ponas Tadas</td>
-            <td>Adomas Mickevičius</td>
-            <td>Poema</td>
-            <td>1834</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Lazda</td>
-            <td>Jonas Biliūnas</td>
-            <td>Novelė</td>
-            <td>1902</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Lakštingala negali nečiulbėti</td>
-            <td>Salomėja Nėris</td>
-            <td>Poezija</td>
-            <td>1945</td>
-            <td>  <a href=../public/customerBasket><input type=button value='Šalinti'></a></td>
-        </tr>
-        </thead>
-    </table>
-        </div>
+
+
+            <?php while($row = mysqli_fetch_array($result)) :?>
+
+            <?php $array =array() ?>
+            <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
+            <td><?php echo $row['pavadinimas'];?></td>
+            <td><?php echo $row['autorius'];?></td>
+            <td><?php echo $row['zanras'];?></td>
+            <td><?php echo $row['isleidimo_data'];?></td>
+            <td><?php echo" <a href=../public/deletefrombasket?bookid=",urlencode($idd),"><input type=button id='$idd' value='šalinti' ></a> " ?></td>
+            <td><?php echo" <a href=../public/bookInfo?bookid=",urlencode($idd),"><input type=button id='$idd' value='Peržiūrėti' ></a> " ?></td>
+
+            </tr>
+
+            <?php endwhile;?>
+            </tbody>
+        </table>
     </div>
+</div>
 </html>
 </body>

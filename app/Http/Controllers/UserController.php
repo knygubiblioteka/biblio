@@ -81,8 +81,8 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         $data2 = mysqli_query($dbc, $sql2);
         $row = mysqli_fetch_assoc($data);
         $row2 = mysqli_fetch_assoc($data2);
-
-
+        $dataa = date("Y-m-d");
+        $dataatogive = strtotime($dataa. ' + 60 days');
 
         if(is_null($row['vardas'])&&is_null($row2['vardas']))
         {
@@ -108,8 +108,20 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
             $_SESSION["city"]= $row['miestas'];
             $_SESSION["id"]= $row['id_Vartotojas'];
             $_SESSION["reports"]= NULL;
+            $_SESSION["orderdone"]= NULL;
+            $_SESSION["unit"]= 1;
             //$_SESSION["data"] = $row['gimimo_data'];
             //$_SESSION["sex"] = $row['lytis'];
+            $user=$_SESSION['id'];
+            $uni=$_SESSION['unit'];
+            $sql3 = "INSERT INTO uzsakymas(uzsakymo_data,planuojama_grazinimo_data,uzsakymo_busena,fk_Vartotojasid_Vartotojas,fk_Padalinysid_Padalinys) VALUES('$dataa',' $dataatogive','1','$user','$uni')";
+            $sql4= "SELECT * FROM uzsakymas ORDER by id_Uzsakymas DESC LIMIT 1 ";
+            if (mysqli_query($dbc, $sql3))
+            {
+                $last = mysqli_query($dbc, $sql4);
+                $row3 = mysqli_fetch_assoc($last);
+                $_SESSION["order"]=$row3['id_Uzsakymas'];
+            }
             return redirect('/catalog');
 
         }else
@@ -198,6 +210,11 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
 
     public function logout(request $request)
     {
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $order=$_SESSION["order"];
         $_SESSION["name"] = NULL;
         $_SESSION["surname"] = NULL;
         $_SESSION["phone"] = NULL;
@@ -207,6 +224,9 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         $_SESSION["username"]=NULL;
         $_SESSION["id"]= NULL;
         $_SESSION["reports"]= NULL;
+        $_SESSION["order"]=NULL;
+        $sql = "DELETE uzsakymas from uzsakymas where id_Uzsakymas='$order'";
+        mysqli_query($dbc, $sql);
         return redirect('/welcome');
     }
 
@@ -303,4 +323,36 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         return redirect('/customerReports');
     }
 
+
+    public function addtobasket(request $request)
+    {
+        $fk =($request->input('fk'));
+        $user=$_SESSION['id'];
+        $uni=$_SESSION['unit'];
+        $orderid=$_SESSION["order"];
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $sql="select * from knyga where id_Knyga='$fk' ";
+        $result = mysqli_query($dbc, $sql);
+
+        $sql3 = "UPDATE knyga SET fk_Uzsakymasid_Uzsakymas='$orderid'where id_Knyga=$fk";
+        mysqli_query($dbc, $sql3);
+        return redirect('/catalog');
+
+    }
+
+
+    public function deletefrombasket(request $request)
+    {
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $bookid = $_GET['bookid'];
+        $sql3 = "UPDATE knyga SET fk_Uzsakymasid_Uzsakymas=NULL where id_Knyga=$bookid";
+        mysqli_query($dbc, $sql3);
+        return redirect('/basket');
+    }
 }

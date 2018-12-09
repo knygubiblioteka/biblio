@@ -79,9 +79,11 @@ VALUES ('$aprasymas', '$vertinimas', DEFAULT , '$fk')";
             <script>
             window.onload = function() {
              alert("Rekomendacija sėkmingai pridėta");
-            location.href=("/projektas/public/catalog");  
+            
         }
-         </script>';}
+         </script>';
+                return redirect('/catalog');}
+
             else die ("Klaida įrašant:" .mysqli_error($dbc));
         }
     }
@@ -104,9 +106,10 @@ VALUES ('$aprasymas', '$vertinimas', DEFAULT , '$fk')";
             <script>
             window.onload = function() {
              alert("Tokia knyga neegzistuoja");
-            location.href=("/projektas/public/catalog");  
+           
         }
          </script>';
+            return redirect('/catalog');
         }
         else {
             $sql = "DELETE FROM knyga WHERE `id_Knyga`=$id";
@@ -117,9 +120,10 @@ VALUES ('$aprasymas', '$vertinimas', DEFAULT , '$fk')";
             <script>
             window.onload = function() {
              alert("Knyga sėkmingai ištrinta");
-            location.href=("/projektas/public/catalog");  
+         
         }
          </script>';
+                return redirect('/catalog');
             }
         }
 
