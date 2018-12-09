@@ -23,7 +23,12 @@ session_start();
             <li><a href="catalog">Katalogas</a></li>
             <li><a href="ClientManagement">Paskyros valdymas</a></li>
             <li><a href="reports">Ataskaitos</a></li>
-            <li><a href="reports">Padaliniu valdymas</a></li>
+            <?php
+                if (   $_SESSION["person"] == 9 )
+                    {
+           echo" <li><a href='unitManagement'>Padaliniu valdymas</a></li>";
+            }
+            ?>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">

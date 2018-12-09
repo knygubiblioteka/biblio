@@ -57,8 +57,32 @@ Route::get('/reports', function () {
 
 Route::get('/showtable', 'ReportsController@showtable');
 
+Route::get('/addunit', 'UnitController@addunit');
+
+Route::get('/deleteunit', 'UnitController@deleteunit');
+
+Route::get('/editUnit', 'UnitController@editUnit');
+
+Route::get('/AddUnit', function () {
+    return view('pages.AddUnit');
+
+});
+Route::get('/unitedit', function () {
+    return view('pages.unitedit');
+
+});
+
+Route::get('/UnitList', function () {
+    return view('pages.UnitList');
+
+});
+
 Route::get('/catalog', function () {
     return view('pages.catalog');
+
+});
+Route::get('/unitManagement', function () {
+    return view('pages.UnitManagement');
 
 });
 Route::get('/book', function () {

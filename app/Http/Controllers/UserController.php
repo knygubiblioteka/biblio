@@ -128,8 +128,14 @@ lytis,id_Vartotojas) values(?,?,?,?,?,?,?,?,?,?)', [$vardas, $pavarde, $gimimo_d
         {
             $_SESSION["username"] = $prisijungimo_vardas;
             $_SESSION["password"] = $slaptazodis;
+            if (  $prisijungimo_vardas=='admin'  )
+            {
+                $_SESSION["person"] = 9;
+            }
+            else{
+                $_SESSION["person"] = 5;
+            }
 
-            $_SESSION["person"] = 5;
             $_SESSION["name"] = $row['vardas'];
             $_SESSION["surname"] = $row['pavarde'];
             $_SESSION["phone"] = $row['mob_numeris'];

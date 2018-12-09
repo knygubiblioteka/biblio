@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+
+<?php
+session_start();
+?>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Biblioteka</title>
@@ -36,7 +40,7 @@
         font-family: 'Nunito', sans-serif;
     }
 
-    input[value="Rodyti"]
+    button
     {
         background-color: #A1B0AB;
         color: black;
@@ -51,7 +55,7 @@
         color: black;
         font-family: 'Nunito', sans-serif;
     }
-    input[type="date"]
+    input
     {
         background-color: #A1B0AB;
         color: black;
@@ -87,7 +91,13 @@
             <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
-            <li class="{{Request::is('/UnitManagement')?'active':null }}"><a href="{{url('/UnitManagement')}}">Padaliniu valdymas</a></li>
+            <?php
+            if (   $_SESSION["person"] == 9 )
+            {
+                echo" <li><a href='unitManagement'>Padaliniu valdymas</a></li>";
+            }
+            ?>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
@@ -106,7 +116,12 @@
 
 </body>
 <body>
-<div class="container">
+<div>
+    <center>
+<a href=../public/AddUnit><input type=button value='Pridėti padalinį'></a>
+        <br><br>
+        <a href=../public/UnitList><input type=button value='Padalinių sąrašas'></a>
+    </center>
 
 </div>
 </body>

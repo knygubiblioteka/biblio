@@ -1,14 +1,5 @@
 <?php
 session_start();
-$id = $_GET['bookid'];
-
-
-$dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
-if (!$dbc) {
-    die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
-}
-$sql="select * from knyga, zanras where id_Knyga = $id and zanras=id_zanras";
-$result = mysqli_query($dbc, $sql);
 ?>
 
 <head>
@@ -97,48 +88,22 @@ $result = mysqli_query($dbc, $sql);
 
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
-            <h3>Knygos peržiūra</h3><br>
-            <div>
-                <?php
-                $row = mysqli_fetch_array($result); ?>
-                <h2>Pavadinimas</h2> <?php echo $row['pavadinimas']; ?>
-                <h2>Autorius</h2> <?php echo $row['autorius']; ?>
-                <h2>Išleidimo data</h2> <?php echo $row['isleidimo_data']; ?>
-                <h2>Leidykla</h2> <?php echo $row['leidykla']; ?>
-                <h2>Žanras</h2>  <?php echo $row['name']; ?>
-                <h2>Puslapių kiekis</h2> <?php echo $row['puslapiu_kiekis']; ?>
-                <h2>ISBN</h2>  <?php echo $row['ISBN']; ?>
-                <h2>Knygų kiekis</h2> <?php echo $row['kiekis']; ?>
-
-            <br><br>
-    </div>
-        <form class="" action="{{URL::to('/addRecomendation')}}" method="post">
+        <form class="" action="{{URL::to('/addunit')}}" method="get">
             @csrf
-            <h3>Pridėkite rekomendaciją:</h3>
-            <br>
-            <h2>Aprašymas</h2> <input type="text" maxlength="255" name="aprasymas" required>
-            <h2>Vertinimas</h2>   <div class="dropdown2">
-                <select name="vertinimas">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+            <h3>Naujo padalinio pridėjimas</h3><br>
+            <div>
+                <h2>Pavadinimas</h2> <input type="text" name="pavadinimas" required>
+                <h2>Miestas</h2> <input type="text" name="miestas" required>
+                <h2>Adresas</h2> <input type="text" name="adress" required/>
+                <h2>vadovas</h2> <input type="text" name="vadovas" required>
+                <h2>Mob Numeris</h2> <input type="text" name="mob_nr">
+                <h2>El.paštas</h2> <input type="text" name="el">
             </div>
             <br>
             <input type="hidden" name="_token" value="{{csrf_token()}}">
-
-            <input type="hidden" name="fk" value="{{$id}}">
             <button type=submit name="button">Patvirtinti</button>
         </form>
-        <form class="" action="{{URL::to('/addtobasket')}}" method="get">
-
-            <input type="hidden" name="fk" value="{{$id}}">
-            <button type=submit name="button">Pridėti į krepšelį</button>
-        </form>
     </div>
-
 </div>
 </body>
 </html>

@@ -57,21 +57,21 @@
     <form class="" action="{{URL::to('/store')}}" method="post">
         @csrf
         <h3>Vartotojo registracija</h3><br>
-    <input type="text" name="vardas" placeholder="Įveskite vardą" value=""><br>
+    <input type="text" name="vardas" placeholder="Įveskite vardą" value="" required><br>
         <br>
-    <input type="text" name="pavarde" placeholder="Įveskite pavardę" value=""><br>
+    <input type="text" name="pavarde" placeholder="Įveskite pavardę" value="" required><br>
         <br>
-    <input type="text" name="prisijungimo_vardas" placeholder="Įveskite prisijungimo vardą" value=""><br>
+    <input type="text" name="prisijungimo_vardas" placeholder="Įveskite prisijungimo vardą" value="" required><br>
         <br>
-    <input type="date" name="gimimo_data" placeholder="Įveskite gimimo datą" value=""><br>
+    <input type="date" name="gimimo_data" placeholder="Įveskite gimimo datą" value="" required><br>
         <br>
-    <input type="text" name="mob_numeris" placeholder="Įveskite mob. numerį" value=""><br>
+    <input type="text" name="mob_numeris" placeholder="Įveskite mob. numerį" value="" required><br>
         <br>
-    <input type="text" name="miestas" placeholder="Įveskite miestą" value=""><br>
+    <input type="text" name="miestas" placeholder="Įveskite miestą" value="" required><br>
         <br>
-    <input type="email" name="el_pastas" placeholder="Įveskite el. paštą" value=""><br>
+    <input type="email" name="el_pastas" placeholder="Įveskite el. paštą" value="" required><br>
         <br>
-    <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" value=""><br>
+    <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" value="" required><br>
         <br>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <button type=submit name="button">Patvirtinti</button>

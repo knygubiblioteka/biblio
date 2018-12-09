@@ -2,7 +2,7 @@
 session_start();
 ?>
 
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Biblioteka</title>
@@ -110,49 +110,49 @@ session_start();
 <body>
 <html>
 <div class="container">
-    <h3>Žymos</h3>
+    <h3>Padalinių sąrašas</h3>
     <div class="col-xs-12 col-md-8">
-<br><br>
-<?php
-    $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
-if (!$dbc) {
-    die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
-}
-    $user=$_SESSION['id'];
-    $sql="select * from knyga INNER JOIN zyma on knyga.id_Knyga=zyma.fk_Knygaid_Knyga && zyma.fk_Vartotojasid_Vartotojas=$user";
-    $result = mysqli_query($dbc, $sql);
-    ?>
-<table class="table table-hover" >
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Pavadinimas</th>
-        <th>Autorius</th>
-        <th>Žanras</th>
-        <th>Metai</th>
-    </tr>
-    </thead>
-    <tbody>
+        <br><br>
+        <?php
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $user=$_SESSION['id'];
+        $sql="select * from padalinys";
+        $result = mysqli_query($dbc, $sql);
+        ?>
+        <table class="table table-hover" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pavadinimas</th>
+                <th>Vadovas</th>
+                <th>Miestas</th>
+                <th>Mob.Numeris</th>
+
+            </tr>
+            </thead>
+            <tbody>
 
 
 
-    <?php while($row = mysqli_fetch_array($result)) :?>
+            <?php while($row = mysqli_fetch_array($result)) :?>
 
-    <?php $array =array() ?>
-    <td><?php echo $row['id_Knyga'];   $idd =$row['id_Knyga'];?></td>
-    <td><?php echo $row['pavadinimas'];?></td>
-    <td><?php echo $row['autorius'];?></td>
-    <td><?php echo $row['zanras'];?></td>
-    <td><?php echo $row['isleidimo_data'];?></td>
+            <?php $array =array() ?>
+            <td><?php echo $row['id_Padalinys'];   $idd =$row['id_Padalinys'];?></td>
+            <td><?php echo $row['pavadinimas'];?></td>
+            <td><?php echo $row['vadovas'];?></td>
+            <td><?php echo $row['miestas'];?></td>
+            <td><?php echo $row['mob_numeris'];?></td>
+            <td><?php echo" <a href=../public/unitedit?unitid=",urlencode($idd),"><input type=button id='$idd' value='Redaguoti' ></a> " ?></td>
+            <td><?php echo" <a href=../public/deleteunit?unitid=",urlencode($idd),"><input type=button id='$idd' value='šalinti' ></a> " ?></td>
 
+            </tr>
 
-    <td><?php echo" <a href=../public/bookInfo?bookid=",urlencode($idd),"><input type=button id='$idd' value='Peržiūrėti' ></a> " ?></td>
-
-    </tr>
-
-    <?php endwhile;?>
-    </tbody>
-</table>
+            <?php endwhile;?>
+            </tbody>
+        </table>
     </div>
 </div>
 </html>

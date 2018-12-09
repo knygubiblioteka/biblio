@@ -73,8 +73,6 @@ session_start();
         <?php
         if(!empty($_SESSION['error']))
         {
-
-
             if (   $_SESSION['error']=='klaida'  )
             {
                 echo "<h4>Neteisingai įvestas prisijungimo vardas arba slaptažodis</h4>";

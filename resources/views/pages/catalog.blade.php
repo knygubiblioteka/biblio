@@ -105,6 +105,13 @@ session_start();
             <li class="{{Request::is('/catalog')?'active':null }}"><a href="{{url('/catalog')}}">Katalogas</a></li>
             <li class="{{Request::is('/ClientManagement')?'active':null }}"><a href="{{url('/ClientManagement')}}">Paskyros valdymas</a></li>
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
+            <?php
+            if (   $_SESSION["person"] == 9 )
+            {
+                echo" <li><a href='unitManagement'>Padaliniu valdymas</a></li>";
+            }
+            ?>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
