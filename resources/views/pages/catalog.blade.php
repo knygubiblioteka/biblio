@@ -198,8 +198,13 @@ session_start();
                     <td><?php echo $row['autorius'];?></td>
                     <td><?php echo $row['name'];?></td>
                     <td><?php echo $row['isleidimo_data'];?></td>
-                    <td><?php echo" <a href=../public/tagslist?bookid=",urlencode($idd),"><input type=button id='$idd' value='Žymos' ></a> " ?></td>
+                    <?php if($_SESSION["person"]==4)
+                        {
 
+                        ?>
+                    <td><?php echo" <a href=../public/tagslist?bookid=",urlencode($idd),"><input type=button id='$idd' value='Žymos' ></a> " ?></td>
+<?php
+}?>
                 <td><?php echo" <a href=../public/bookInfo?bookid=",urlencode($idd),"><input type=button id='$idd' value='Peržiūrėti' ></a> " ?></td>
                 </tr>
 
