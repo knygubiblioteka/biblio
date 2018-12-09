@@ -118,9 +118,10 @@ session_start();
 <body>
 <div>
     <center>
-<a href=../public/AddUnit><input type=button value='Pridėti padalinį'></a>
         <br><br>
         <a href=../public/UnitList><input type=button value='Padalinių sąrašas'></a>
+        <br><br>
+        <a href=../public/EmployeeList><input type=button value='Darbuotojų sąrašas'></a>
     </center>
 
 </div>
