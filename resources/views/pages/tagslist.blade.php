@@ -95,6 +95,8 @@ session_start();
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
+            <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
+            <li class="{{Request::is('/basket')?'active':null}}"><a href="{{url('/basket')}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
             <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>       </ul>
     </div>
 </nav>
@@ -138,7 +140,7 @@ if (!$dbc) {
     <td><?php echo $row['isleidimo_data'];?></td>
 
 
-    <td> <a href=>Peržiūrėti</a></td>
+    <td><?php echo" <a href=../public/bookInfo?bookid=",urlencode($idd),"><input type=button id='$idd' value='Peržiūrėti' ></a> " ?></td>
 
     </tr>
 

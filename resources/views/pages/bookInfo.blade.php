@@ -80,6 +80,8 @@ $result = mysqli_query($dbc, $sql);
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
+            <li class="{{Request::is('/basket')?'active':null}}"><a href="{{url('/basket')}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
             <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
         </ul>
     </div>
@@ -123,7 +125,13 @@ $result = mysqli_query($dbc, $sql);
             <input type="hidden" name="fk" value="{{$id}}">
             <button type=submit name="button">Patvirtinti</button>
         </form>
+        <form class="" action="{{URL::to('/addtobasket')}}" method="get">
+
+            <input type="hidden" name="fk" value="{{$id}}">
+            <button type=submit name="button">Pridėti į krepšelį</button>
+        </form>
     </div>
+
 </div>
 </body>
 </html>

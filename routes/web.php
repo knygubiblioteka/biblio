@@ -46,6 +46,8 @@ Route::post('/logs', 'UserController@logs');
 
 Route::get('/editclient', 'UserController@editclient');
 
+Route::get('/deletefrombasket', 'UserController@deletefrombasket');
+
 Route::get('/logout', 'UserController@logout');
 
 Route::get('/reports', function () {
@@ -70,8 +72,14 @@ Route::get('/ClientManagement', function () {
 });
 Route::get('/tagslist', 'UserController@tagslist');
 
+
+Route::get('/addtobasket', 'UserController@addtobasket');
+
 Route::get('/reportslist', 'UserController@reports');
 
+Route::get('/basket', function () {
+    return view('pages.customerBasket');
+});
 Route::get('/alltagslist', function () {
     return view('pages.tagslist');
 });

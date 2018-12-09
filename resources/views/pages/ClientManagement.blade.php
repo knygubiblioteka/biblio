@@ -28,6 +28,8 @@ session_start();
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
+            <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
+            <li class="{{Request::is('/basket')?'active':null}}"><a href="{{url('/basket')}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
             <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>        </ul>
     </div>
 </nav>
@@ -109,10 +111,6 @@ session_start();
     if (  $_SESSION["person"] ==4  )
         echo"
       <a href=../public/customerReports><input type=button value='Kliento ataskaitos'></a>
-    <br><br>
-    <a href=../public/customerBasket><input type=button value='Knygų krepšelis'></a>
-    <br><br>
-    <a href=../public/alltagslist><input type=button value='Žymos'></a>
     <br><br>
   <button id='myBtn'>Šalinti paskyrą</button>
 

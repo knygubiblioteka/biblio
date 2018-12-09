@@ -110,6 +110,8 @@ session_start();
             <li class="{{Request::is('/reports')?'active':null }}"><a href="{{url('/reports')}}">Ataskaitos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li class="{{Request::is('/alltagslist')?'active':null}}"><a href="{{url('/alltagslist')}}"><span class="glyphicon glyphicon-tag"></span></a></li>
+            <li class="{{Request::is('/basket')?'active':null}}"><a href="{{url('/basket')}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
             <li class="{{Request::is('/logout')?'active':null}}"><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Atsijungti</a></li>
         </ul>
     </div>
@@ -131,7 +133,7 @@ session_start();
 <?php if($_SESSION["person"]==5)
         {
             echo "
-<td class=\"{{Request::is('/book')?'active':null }}\"><a href='/projektas/public/book'>Pridėti naują knygą</a></td>
+<td class=\"{{Request::is('/book')?'active':null }}\"><a href='../public/book'>Pridėti naują knygą</a></td>
     "; } ?>
     </div>
     </div>
