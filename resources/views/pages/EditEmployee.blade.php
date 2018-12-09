@@ -4,17 +4,20 @@ $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
 if (!$dbc) {
     die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
 }
-$unitid = $_GET['unitid'];
-$sql ="select * from padalinys where id_Padalinys='$unitid'";
+$unitid = $_GET['employeeid'];
+$sql ="select * from darbuotojas where id_Darbuotojas='$unitid'";
 $data=mysqli_query($dbc, $sql);
 $row = mysqli_fetch_assoc($data);
-$_SESSION["uniname"]=$row['pavadinimas'];
-$_SESSION["unicity"]=$row['miestas'];
-$_SESSION["uniadress"]=$row['adresas'];
-$_SESSION["unimain"]=$row['vadovas'];
-$_SESSION["uninr"]=$row['mob_numeris'];
-$_SESSION["uniel"]=$row['el_pastas'];
-$_SESSION["uniid"]=$row['id_Padalinys'];
+$_SESSION["emvardas"]=$row['vardas'];
+$_SESSION["empavarde"]=$row['pavarde'];
+$_SESSION["empvardas"]=$row['prisijungimo_vardas'];
+$_SESSION["emslaptazodis"]=$row['slaptazodis'];
+$_SESSION["emnumeris"]=$row['mob_numeris'];
+$_SESSION["emel"]=$row['el_pastas'];
+$_SESSION["emgimdata"]=$row['gimimo_data'];
+$_SESSION["emisidata"]=$row['Isidarbinimo_data'];
+$_SESSION["empareigos"]=$row['pareigos'];
+$_SESSION["emid"]=$row['id_Darbuotojas'];
 
 ?>
         <!DOCTYPE html>
@@ -109,26 +112,40 @@ $_SESSION["uniid"]=$row['id_Padalinys'];
 <body>
 <center>
     <br>
-    <h2>Duomenų redagavimas</h2>
+    <h2>Darbuotojo duomenų redagavimas</h2>
 
-    <form class="" action="{{URL::to('/editUnit')}}" method="get">
-        Pavadinimas:<br>
-        <input type="text" name="pavadinimas" value="<?php echo $_SESSION["uniname"]; ?>">
+    <form class="" action="{{URL::to('/editemployee')}}" method="get">
+        Vardas:<br>
+        <input type="text" name="vardas" value="<?php echo $_SESSION["emvardas"]; ?>">
         <br><br>
-        Miestas:<br>
-        <input type="text" name="miestas" value="<?php echo $_SESSION["unicity"]; ?>"><br><br>
-        Adresas:<br>
-        <input type="text" name="adress" value="<?php echo  $_SESSION["uniadress"]; ?>"><br><br>
-        Vadovas<br>
-        <input type="text" name="vadovas" value="<?php echo   $_SESSION["unimain"]; ?>"><br>
+        Pavardė:<br>
+        <input type="text" name="pavarde" value="<?php echo $_SESSION["empavarde"]; ?>"><br><br>
+        Prisijungimo vardas:<br>
+        <input type="text" name="pvardas" value="<?php echo  $_SESSION["empvardas"]; ?>"><br><br>
+        Slaptažodis<br>
+        <input type="text" name="slaptazodis" value="<?php echo   $_SESSION["emslaptazodis"]; ?>"><br>
         <br>
         Mob_numeris:<br>
-        <input type="text" name="mob_nr" value="<?php echo  $_SESSION["uninr"]; ?>"><br>
+        <input type="text" name="mob_nr" value="<?php echo  $_SESSION["emnumeris"]; ?>"><br>
         <br>
         El.Pašas:<br>
-        <input type="text" name="el" value="<?php echo $_SESSION["uniel"]; ?>"><br>
+        <input type="text" name="el" value="<?php echo $_SESSION["emel"]; ?>"><br>
         <br>
-        <input type="hidden" name="idd" value="<?php echo $_SESSION["uniid"]; ?>">
+        Gimimo data:<br>
+        <input type="date" name="gdata" value="<?php echo $_SESSION["emgimdata"]; ?>"><br>
+        <br>
+        Įsidarbinimo data:<br>
+        <input type="date" name="idata" value="<?php echo $_SESSION["emisidata"]; ?>"><br>
+        <br>
+        Pareigos:<br>
+        <div class="dropdown2">
+            <select name="pareigos" required>
+                <option value="1">Administratorius</option>
+                <option value="2">Darbuotojas</option>
+            </select>
+        </div>
+        <br>
+        <input type="hidden" name="idd" value="<?php echo $_SESSION["emid"]; ?>">
         <input type="submit" value="Pakeisti">
     </form>
 </center>

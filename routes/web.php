@@ -65,7 +65,6 @@ Route::get('/editUnit', 'UnitController@editUnit');
 
 Route::get('/AddUnit', function () {
     return view('pages.AddUnit');
-
 });
 Route::get('/unitedit', function () {
     return view('pages.unitedit');
@@ -120,3 +119,18 @@ Route::get('/customerBasket', function () {
 Route::get('/UnitManagement', function () {
     return view('pages.UnitManagement');
 });
+
+Route::get('/EmployeeList', function () {
+    return view('pages.EmployeeList');
+});
+Route::get('/AddEmployee', function () {
+    return view('pages.AddEmployee');
+});
+Route::get('/EditEmployee', function () {
+    return view('pages.EditEmployee');
+});
+Route::get('/addemployee', 'UnitController@addemployee');
+
+Route::get('/deleteemployee', 'UnitController@deleteemployee');
+
+Route::get('/editemployee', 'UnitController@editemployee');

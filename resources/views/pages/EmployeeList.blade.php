@@ -68,7 +68,7 @@ session_start();
             position: absolute;
             right: 145px;
         }
-        .h3{
+        h3{
             position: absolute;
             right: 300px;
             top:80px;
@@ -111,45 +111,45 @@ session_start();
 <html>
 
 <div style='text-align:center'>
-    <h2>Padalinių sąrašas</h2>
+    <h2>Darbuotojų sąrašas</h2>
 </div>
 
 <div class="container">
     <div class="col-xs-12 col-md-8">
-         <a href=../public/AddUnit><input type=button value='Pridėti padalinį'></a>
-             <br><br>
-             <?php
-             $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
-             if (!$dbc) {
-                 die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
-             }
-             $user=$_SESSION['id'];
-             $sql="select * from padalinys";
-             $result = mysqli_query($dbc, $sql);
-             ?>
-                  <table class="table table-hover">
-                      <thead>
-                        <tr class="header">
-                            <th>ID</th>
-                            <th>Pavadinimas</th>
-                            <th>Vadovas</th>
-                            <th>Miestas</th>
-                            <th>Mob.Numeris</th>
-                            <th>El.Paštas</th>
-                        </tr>
-                      </thead>
-                <tbody>
+        <a href=../public/AddEmployee><input type=button value='Pridėti darbuotoją'></a>
+        <br><br>
+        <?php
+        $dbc = mysqli_connect('localhost', 'root', '', 'biblioteka');
+        if (!$dbc) {
+            die ("Negaliu prisijungti prie MySQL:" . mysqli_error($dbc));
+        }
+        $user=$_SESSION['id'];
+        $sql="select * from darbuotojas";
+        $result = mysqli_query($dbc, $sql);
+        ?>
+        <table class="table table-hover">
+            <thead>
+            <tr class="header">
+                <th>ID</th>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th>Mob. numeris</th>
+                <th>El. paštas</th>
+                <th>Pareigos</th>
+            </tr>
+            </thead>
+            <tbody>
             <?php while($row = mysqli_fetch_array($result)) :?>
             <tr>
-            <?php $array =array() ?>
-            <td><?php echo $row['id_Padalinys'];   $idd =$row['id_Padalinys'];?></td>
-            <td><?php echo $row['pavadinimas'];?></td>
-            <td><?php echo $row['vadovas'];?></td>
-            <td><?php echo $row['miestas'];?></td>
-            <td><?php echo $row['mob_numeris'];?></td>
-                <td><?php echo $row['el_pastas'];?></td>
-            <td><?php echo" <a href=../public/unitedit?unitid=",urlencode($idd),"><input type=button id='$idd' value='Redaguoti' ></a> " ?></td>
-            <td><?php echo" <a href=../public/deleteunit?unitid=",urlencode($idd),"><input type=button id='$idd' value='Šalinti' ></a> " ?></td>
+                <?php $array =array() ?>
+                <td><?php echo $row['id_Darbuotojas'];   $idd =$row['id_Darbuotojas'];?></td>
+                <td><?php echo $row['vardas'];?></td>
+                <td><?php echo $row['pavarde'];?></td>
+                    <td><?php echo $row['mob_numeris'];?></td>
+                    <td><?php echo $row['el_pastas'];?></td>
+                    <td><?php echo $row['pareigos'];?></td>
+                <td><?php echo" <a href=../public/EditEmployee?employeeid=",urlencode($idd),"><input type=button id='$idd' value='Redaguoti' ></a> " ?></td>
+                <td><?php echo" <a href=../public/deleteemployee?employeeid=",urlencode($idd),"><input type=button id='$idd' value='Šalinti' ></a> " ?></td>
             </tr>
 
             <?php endwhile;?>
